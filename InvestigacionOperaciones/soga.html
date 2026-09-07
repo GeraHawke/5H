@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Investigación de Operaciones - Corte de Soga Corregido</title>
+  <title>Modelado de Áreas - Círculo y Cuadrado</title>
   <!-- Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Chart.js para la gráfica -->
@@ -12,7 +12,9 @@
 <body class="bg-light py-4">
 
   <div class="container bg-white p-4 rounded shadow-sm">
-    <h2 class="text-center mb-4 text-primary fw-bold">Optimización de Corte de Soga (10m)</h2>
+    <h2 class="text-center mb-4 text-primary fw-bold">
+      Modelado de Áreas<br>Círculo y Cuadrado
+    </h2>
     
     <!-- Tarjeta con el Resultado del Área Mínima -->
     <div id="resultado" class="alert alert-success text-center fw-bold fs-5 mb-4 shadow-sm">
@@ -22,10 +24,11 @@
     <div class="row">
       <!-- Columna de la Tabla -->
       <div class="col-lg-6 mb-4">
-        <h4 class="mb-3">Tabla de Resultados</h4>
+        <!-- Título centrado -->
+        <h4 class="mb-3 text-center">Tabla de Resultados</h4>
         <div class="table-responsive" style="max-height: 480px; overflow-y: auto;">
           <table class="table table-striped table-hover align-middle">
-            <thead class="table-dark sticky-top">
+            <thead class="table-dark sticky-top text-center">
               <tr>
                 <th>Perímetro X (Círculo)</th>
                 <th>Perímetro Y (Cuadrado)</th>
@@ -34,7 +37,8 @@
                 <th>Área Total (m²)</th>
               </tr>
             </thead>
-            <tbody id="cuerpoTabla">
+            <!-- Contenido de la tabla centrado -->
+            <tbody id="cuerpoTabla" class="text-center">
               <!-- Se llena dinámicamente mediante JS -->
             </tbody>
           </table>
@@ -43,7 +47,8 @@
 
       <!-- Columna de la Gráfica -->
       <div class="col-lg-6 mb-4">
-        <h4 class="mb-3">Gráfica de Área Total vs Perímetro X</h4>
+        <!-- Título centrado -->
+        <h4 class="mb-3 text-center">Gráfica de Área Total vs Perímetro X</h4>
         <div class="card p-3 shadow-sm">
           <div style="position: relative; height: 400px;">
             <canvas id="graficaMinimizacion"></canvas>
@@ -55,14 +60,15 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const totalSoga = 10.0;
-      let mejorX = 0, mejorY = 0, minArea = Infinity;
+  const totalSoga = 10.0;
+  let mejorX = 0, mejorY = 0, minArea = Infinity;
 
-      const datosPuntos = [];
-      const cuerpoTabla = document.getElementById("cuerpoTabla");
+  const datosPuntos = [];
+  const cuerpoTabla = document.getElementById("cuerpoTabla");
 
-      for (let x = 0; x <= 10.0; x = Number((x + 0.1).toFixed(1))) {
-        let y = totalSoga - x;
+  // Inicia en 10.0 y decrementa hasta 0.0
+  for (let x = 10.0; x >= 0; x = Number((x - 0.1).toFixed(1))) {
+    let y = totalSoga - x;
 
         // Cálculos geométricos precisos
         let radio = x / (2 * Math.PI);
@@ -123,12 +129,12 @@
               label: 'Punto Mínimo (Óptimo)',
               data: [{ x: xOptimo, y: areaOptima }],
               type: 'scatter',
-              backgroundColor: '#dc3545', // Rojo llamativo
+              backgroundColor: '#dc3545',
               borderColor: '#ffffff',
               borderWidth: 2,
-              pointRadius: 8, // Tamaño del punto
+              pointRadius: 8,
               pointHoverRadius: 10,
-              order: 1 // Dibuja este dataset AL FINAL (al frente de todos)
+              order: 1
             },
             {
               label: 'Área Total (m²)',
@@ -140,7 +146,7 @@
               tension: 0.4,
               pointRadius: 0,
               pointHitRadius: 10,
-              order: 2 // Dibuja la curva detrás del punto rojo
+              order: 2
             }
           ]
         },
