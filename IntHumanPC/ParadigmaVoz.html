@@ -110,14 +110,13 @@
   <h1>Control de Caja por Voz</h1>
 
   <div class="instrucciones">
-    <p style="margin: 0;"><b>Instrucciones:</b></p>
+    <p style="margin: 0;"><b>Ejemplos soportados:</b></p>
     <ul>
-      <li><b>Sectores o Centro:</b> <i>"Sector 1, Centro, Sector 3"</i>.</li>
-      <li><b>Acciones consecutivas:</b> <i>"Arriba, derecha, derecha, abajo"</i>.</li>
+      <li><i>"Sector uno, derecha, abajo"</i></li>
+      <li><i>"Sector 7, arriba, centro, izquierda"</i></li>
     </ul>
   </div>
 
-  <!-- Botón dinámico Verde / Rojo -->
   <button id="btnEscuchar" class="btn-encender">Activar micrófono 🎙️</button>
   <div id="estado">Micrófono apagado</div>
 
@@ -152,14 +151,17 @@
       9: { x: 475, y: 475 }
     };
 
-    const numMap = { "uno": 1, "dos": 2, "tres": 3, "cuatro": 4, "cinco": 5, "seis": 6, "siete": 7, "ocho": 8, "nueve": 9 };
+    const numMap = { 
+      "uno": 1, "dos": 2, "tres": 3, "cuatro": 4, 
+      "cinco": 5, "seis": 6, "siete": 7, "ocho": 8, "nueve": 9 
+    };
 
     const caja = document.getElementById("caja");
     const btnEscuchar = document.getElementById("btnEscuchar");
     const estado = document.getElementById("estado");
 
-    let escuchandoManual = false; // Estado global deseado por el usuario
-    let procesandoSecuencia = false; // Evita solapar lecturas de voz durante movimientos
+    let escuchandoManual = false; 
+    let procesandoSecuencia = false; 
 
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -173,7 +175,6 @@
       reconocimiento.continuous = true;
       reconocimiento.interimResults = false;
 
-      // ACTUALIZAR ESTADO VISUAL DEL BOTÓN
       function actualizarEstadoBoton(activo) {
         if (activo) {
           btnEscuchar.textContent = "Apagar micrófono 🛑";
@@ -188,14 +189,13 @@
         }
       }
 
-      // FUNCIÓN PARA QUE EL NAVEGADOR HABLE
       function hablar(texto) {
         return new Promise((resolve) => {
           if ('speechSynthesis' in window) {
             window.speechSynthesis.cancel();
 
             try {
-              reconocimiento.abort(); // Pausar micrófono brevemente mientras habla
+              reconocimiento.abort();
             } catch(e) {}
 
             const mensaje = new SpeechSynthesisUtterance(texto);
@@ -213,10 +213,8 @@
         });
       }
 
-      // EVENTO DEL BOTÓN VERDE/ROJO
       btnEscuchar.addEventListener("click", () => {
         if (!escuchandoManual) {
-          // ENCENDER MICRÓFONO
           escuchandoManual = true;
           actualizarEstadoBoton(true);
           try {
@@ -226,7 +224,6 @@
             console.log("Error al iniciar micrófono:", e);
           }
         } else {
-          // APAGAR MICRÓFONO
           escuchandoManual = false;
           actualizarEstadoBoton(false);
           try {
@@ -247,68 +244,73 @@
         console.log("Escuchado:", texto);
         estado.textContent = `Escuchado: "${texto}"`;
 
-        // 1. SECTORES O CENTRO
-        const regexSectores = /(sector\s*(\d+|uno|dos|tres|cuatro|cinco|seis|siete|ocho|nueve)|centro)/gi;
-        const coincidenciasSectores = [...texto.matchAll(regexSectores)];
+        // EXTRAER Y ORDENAR COMANDOS EN SECUENCIA
+        const comandosExtraidos = extraerComandosEnOrden(texto);
 
-        if (coincidenciasSectores.length > 0) {
+        if (comandosExtraidos.length > 0) {
           procesandoSecuencia = true;
 
-          for (const match of coincidenciasSectores) {
-            let termino = match[0].toLowerCase();
-            let numSector = null;
-
-            if (termino.includes("centro")) {
-              numSector = 5;
-            } else {
-              let valor = match[2];
-              numSector = parseInt(valor);
-              if (isNaN(numSector)) numSector = numMap[valor];
-            }
-
-            if (numSector && CENTROS_SECTORES[numSector]) {
-              posX = CENTROS_SECTORES[numSector].x;
-              posY = CENTROS_SECTORES[numSector].y;
+          for (const item of comandosExtraidos) {
+            if (item.tipo === "sector") {
+              posX = CENTROS_SECTORES[item.valor].x;
+              posY = CENTROS_SECTORES[item.valor].y;
+              actualizarPosicionCaja();
+              await hablar(item.etiqueta);
+            } else if (item.tipo === "direccion") {
+              if (item.valor === "derecha") posX = Math.min(posX + PASO, 475);
+              else if (item.valor === "izquierda") posX = Math.max(posX - PASO, 75);
+              else if (item.valor === "arriba") posY = Math.max(posY - PASO, 75);
+              else if (item.valor === "abajo") posY = Math.min(posY + PASO, 475);
 
               actualizarPosicionCaja();
-              let textoHablar = (numSector === 5 && termino.includes("centro")) ? "Centro" : `Sector ${numSector}`;
-              
-              await hablar(textoHablar);
-              await esperar(400);
+              await hablar(item.valor);
             }
-          }
-
-          procesandoSecuencia = false;
-          reanudarMicronofono();
-          return;
-        }
-
-        // 2. BUSCAR DIRECCIONES Y MOVER PASO A PASO
-        const comandosDireccion = texto.match(/(derecha|izquierda|arriba|abajo)/g);
-
-        if (comandosDireccion && comandosDireccion.length > 0) {
-          procesandoSecuencia = true;
-
-          for (const comando of comandosDireccion) {
-            if (comando === "derecha") {
-              posX = Math.min(posX + PASO, 475);
-            } else if (comando === "izquierda") {
-              posX = Math.max(posX - PASO, 75);
-            } else if (comando === "arriba") {
-              posY = Math.max(posY - PASO, 75);
-            } else if (comando === "abajo") {
-              posY = Math.min(posY + PASO, 475);
-            }
-
-            actualizarPosicionCaja();
-            await hablar(comando);
-            await esperar(400);
+            await esperar(400); // Pausa visual entre cada paso
           }
 
           procesandoSecuencia = false;
           reanudarMicronofono();
         }
       };
+
+      // Función encargada de parsear la cadena completa preservando el orden exacto
+      function extraerComandosEnOrden(texto) {
+        const regexGlobal = /(sector\s*(\d+|uno|dos|tres|cuatro|cinco|seis|siete|ocho|nueve)|centro|derecha|izquierda|arriba|abajo)/gi;
+        const coincidencias = [...texto.matchAll(regexGlobal)];
+        
+        const comandos = [];
+
+        for (const match of coincidencias) {
+          const termino = match[0].toLowerCase();
+
+          if (termino.includes("sector")) {
+            const val = match[2];
+            let numSector = parseInt(val);
+            if (isNaN(numSector)) numSector = numMap[val];
+
+            if (numSector && CENTROS_SECTORES[numSector]) {
+              comandos.push({
+                tipo: "sector",
+                valor: numSector,
+                etiqueta: `Sector ${numSector}`
+              });
+            }
+          } else if (termino === "centro") {
+            comandos.push({
+              tipo: "sector",
+              valor: 5,
+              etiqueta: "Centro"
+            });
+          } else if (["derecha", "izquierda", "arriba", "abajo"].includes(termino)) {
+            comandos.push({
+              tipo: "direccion",
+              valor: termino
+            });
+          }
+        }
+
+        return comandos;
+      }
 
       function actualizarPosicionCaja() {
         caja.style.left = `${posX}px`;
@@ -325,13 +327,10 @@
         }
       }
 
-      // MANEJO DE DESCONEXIÓN O PAUSA
       reconocimiento.onend = () => {
         if (escuchandoManual && !procesandoSecuencia && !window.speechSynthesis.speaking) {
-          // Si el usuario quería que siguiera encendido, lo reconecta automáticamente
           reanudarMicronofono();
         } else if (!escuchandoManual) {
-          // Si el usuario lo apagó, actualiza la UI a verde
           actualizarEstadoBoton(false);
         }
       };
