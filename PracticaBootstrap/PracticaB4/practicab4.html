@@ -8,6 +8,83 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    .main-nav-bar {
+      transition: box-shadow 0.2s ease;
+    }
+
+    .main-nav-bar.is-scrolled {
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
+    }
+
+    .scroll-user-actions {
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      transform: translateX(8px);
+      transition: max-width 0.25s ease, opacity 0.2s ease, transform 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .main-nav-bar.is-scrolled .scroll-user-actions {
+      max-width: 230px;
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .search-control {
+      width: min(260px, 42vw);
+      transition: width 0.25s ease;
+    }
+
+    .search-control.is-collapsed {
+      width: 2.25rem;
+    }
+
+    .search-control input {
+      min-width: 0;
+      opacity: 1;
+      pointer-events: auto;
+      transition: opacity 0.15s ease;
+    }
+
+    .search-control.is-collapsed input {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .main-nav-bar.is-scrolled .scroll-subscribe {
+      background-color: #fff;
+      border-color: #fff;
+      color: var(--bs-danger);
+    }
+
+    .main-nav-bar.is-scrolled .scroll-login {
+      background-color: var(--bs-danger);
+      border-color: var(--bs-danger);
+      color: #fff;
+    }
+
+    .search-toggle {
+      width: 2.25rem;
+      height: 2.25rem;
+      z-index: 1;
+    }
+
+    .search-control:not(.is-collapsed) .search-toggle {
+      color: var(--bs-secondary-color) !important;
+    }
+
+    @media (max-width: 575.98px) {
+      .main-nav-bar.is-scrolled .scroll-user-actions {
+        max-width: 180px;
+      }
+
+      .search-control {
+        width: min(210px, 58vw);
+      }
+    }
+  </style>
 </head>
 <body class="bg-white">
 
@@ -55,7 +132,7 @@
     <!-- CINTA ROJA NAVEGACIÓN PRINCIPAL + MEGAMENÚ FLOTANTE               -->
     <!-- ================================================================= -->
     <div class="sticky-top">
-      <nav class="navbar navbar-expand-lg navbar-dark bg-danger py-1">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-danger py-1 main-nav-bar" id="mainNavBar">
         <div class="container d-flex justify-content-center align-items-center flex-wrap gap-2 gap-md-3">
           
           <!-- Enlaces principales centrados junto con el botón Más + -->
@@ -120,13 +197,19 @@
             </button>
           </div>
 
-          <!-- Acciones derechas en cinta roja (Búsqueda expandida) -->
+          <!-- Acciones que aparecen cuando la navbar se compacta al hacer scroll -->
+          <div class="scroll-user-actions d-flex align-items-center gap-2 order-2 order-lg-3">
+            <button class="btn btn-danger border border-light btn-sm fw-bold text-nowrap scroll-subscribe" type="button">Suscríbete</button>
+            <button class="btn btn-light btn-sm text-nowrap scroll-login" type="button">Iniciar sesión</button>
+          </div>
+
+          <!-- Búsqueda abierta normalmente y compacta al hacer scroll -->
           <div class="d-flex align-items-center gap-2 ms-auto ms-lg-0">
-            <div class="d-flex align-items-center position-relative">
-              <input type="search" class="form-control form-control-sm rounded-pill px-3 pe-5" placeholder="Buscar en marca.com" aria-label="Buscar en marca.com" style="width: 260px;">
-              <span class="position-absolute end-0 me-3 text-muted">
+            <div class="search-control d-flex align-items-center position-relative" id="searchControl">
+              <input type="search" class="form-control form-control-sm rounded-0 px-3 pe-5" placeholder="Buscar en marca.com" aria-label="Buscar en marca.com">
+              <button class="search-toggle btn btn-link text-white position-absolute end-0 top-50 translate-middle-y p-0" id="searchToggle" type="button" aria-label="Enfocar búsqueda" aria-expanded="true">
                 <i class="bi bi-search"></i>
-              </span>
+              </button>
             </div>
           </div>
 
@@ -230,6 +313,36 @@
           btnMenuMas.classList.add('btn-danger', 'text-white');
         });
       }
+
+      const mainNavBar = document.getElementById('mainNavBar');
+      const searchControl = document.getElementById('searchControl');
+      const searchToggle = document.getElementById('searchToggle');
+
+      function updateNavOnScroll() {
+        const isScrolled = window.scrollY > 80;
+        mainNavBar.classList.toggle('is-scrolled', isScrolled);
+        searchControl.classList.toggle('is-collapsed', isScrolled);
+        searchToggle.setAttribute('aria-expanded', String(!isScrolled));
+        searchToggle.setAttribute('aria-label', isScrolled ? 'Abrir búsqueda' : 'Enfocar búsqueda');
+      }
+
+      window.addEventListener('scroll', updateNavOnScroll);
+      updateNavOnScroll();
+
+      searchToggle.addEventListener('click', function () {
+        if (!mainNavBar.classList.contains('is-scrolled')) {
+          searchControl.querySelector('input').focus();
+          return;
+        }
+
+        const isOpen = searchControl.classList.toggle('is-collapsed') === false;
+        searchToggle.setAttribute('aria-expanded', String(isOpen));
+        searchToggle.setAttribute('aria-label', isOpen ? 'Cerrar búsqueda' : 'Abrir búsqueda');
+
+        if (isOpen) {
+          searchControl.querySelector('input').focus();
+        }
+      });
     </script>
 
     <!-- Contenido debajo de la cinta roja -->
