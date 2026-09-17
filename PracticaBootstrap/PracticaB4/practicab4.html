@@ -13,8 +13,38 @@
       transition: box-shadow 0.2s ease;
     }
 
+    .main-brand-logo {
+      width: clamp(90px, 10vw, 130px);
+      height: auto;
+    }
+
+    .top-mini-icons a {
+      flex: 1 1 0;
+      min-width: 0;
+      text-align: center;
+    }
+
+    .top-mini-icons img {
+      width: min(100%, 125px);
+      height: auto;
+    }
+
     .main-nav-bar.is-scrolled {
       box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
+    }
+
+    .scroll-brand {
+      width: 0;
+      height: 28px;
+      object-fit: contain;
+      opacity: 0;
+      overflow: hidden;
+      transition: width 0.25s ease, opacity 0.2s ease;
+    }
+
+    .main-nav-bar.is-scrolled .scroll-brand {
+      width: 34px;
+      opacity: 1;
     }
 
     .scroll-user-actions {
@@ -33,7 +63,7 @@
     }
 
     .search-control {
-      width: min(260px, 42vw);
+      width: clamp(150px, 24vw, 210px);
       transition: width 0.25s ease;
     }
 
@@ -43,6 +73,9 @@
 
     .search-control input {
       min-width: 0;
+      padding-left: 0.5rem;
+      padding-right: 2.25rem;
+      font-size: 0.85rem;
       opacity: 1;
       pointer-events: auto;
       transition: opacity 0.15s ease;
@@ -75,13 +108,19 @@
       color: var(--bs-secondary-color) !important;
     }
 
+    @media (min-width: 992px) {
+      .main-nav-bar > .container {
+        flex-wrap: nowrap;
+      }
+    }
+
     @media (max-width: 575.98px) {
       .main-nav-bar.is-scrolled .scroll-user-actions {
         max-width: 180px;
       }
 
       .search-control {
-        width: min(210px, 58vw);
+        width: clamp(140px, 50vw, 180px);
       }
     }
   </style>
@@ -91,21 +130,21 @@
   <!-- ================================================================= -->
   <!-- SECCIÓN 1                                                         -->
   <!-- ================================================================= -->
-  <section id="seccion-1" class="mb-5 border-bottom pb-4">
+  <section id="seccion-1" class="mb-5 pb-4">
     
     <!-- Encabezado superior -->
     <div class="container pt-3 px-0">
       <div class="row align-items-center g-2 mb-2 border-bottom pb-2">
         
         <!-- Iconos e imágenes superiores envueltos en hipervínculos -->
-        <div class="col-12 col-md-4 d-flex align-items-center justify-content-center justify-content-md-start gap-3 flex-wrap">
-          <a href="#"><img src="Recursos/mini1.png" alt="Mini Icono 1" class="img-fluid"></a>
-          <a href="#"><img src="Recursos/mini2.png" alt="Mini Icono 2" class="img-fluid"></a>
-          <a href="#"><img src="Recursos/mini3.png" alt="Mini Icono 3" class="img-fluid"></a>
+        <div class="col-12 col-md-4 top-mini-icons d-flex align-items-center justify-content-center gap-2 flex-nowrap">
+          <a href="#"><img src="Recursos/mini1.png" alt="Mini Icono 1"></a>
+          <a href="#"><img src="Recursos/mini2.png" alt="Mini Icono 2"></a>
+          <a href="#"><img src="Recursos/mini3.png" alt="Mini Icono 3"></a>
         </div>
 
         <div class="col-12 col-md-4 text-center">
-          <a href="#"><img src="Recursos/mini4.png" alt="MARCA" class="img-fluid"></a>
+          <a href="#"><img src="Recursos/marca1.webp" alt="MARCA" class="main-brand-logo"></a>
         </div>
 
         <!-- Selector de Edición / Idioma y botones de usuario -->
@@ -137,6 +176,10 @@
           
           <!-- Enlaces principales centrados junto con el botón Más + -->
           <div class="col-12 col-lg navbar-nav fw-bold gap-2 gap-md-3 flex-row flex-wrap justify-content-center align-items-center small">
+
+            <a href="#" class="scroll-brand" aria-label="MARCA">
+              <img src="Recursos/marca-m.jpg" alt="MARCA" class="img-fluid h-100">
+            </a>
             
             <!-- Fútbol (Dropdown) -->
             <div class="nav-item dropdown">
@@ -206,7 +249,7 @@
           <!-- Búsqueda abierta normalmente y compacta al hacer scroll -->
           <div class="col-auto d-flex align-items-center gap-2 ms-auto ms-lg-0">
             <div class="search-control d-flex align-items-center position-relative" id="searchControl">
-              <input type="search" class="form-control form-control-sm rounded-0 px-3 pe-5" placeholder="Buscar en marca.com" aria-label="Buscar en marca.com">
+              <input type="search" class="form-control form-control-sm rounded-0" placeholder="Buscar en marca.com" aria-label="Buscar en marca.com">
               <button class="search-toggle btn btn-link text-white position-absolute end-0 top-50 translate-middle-y p-0" id="searchToggle" type="button" aria-label="Enfocar búsqueda" aria-expanded="true">
                 <i class="bi bi-search"></i>
               </button>
@@ -320,10 +363,15 @@
 
       function updateNavOnScroll() {
         const isScrolled = window.scrollY > 80;
+        const wasScrolled = mainNavBar.classList.contains('is-scrolled');
+
         mainNavBar.classList.toggle('is-scrolled', isScrolled);
-        searchControl.classList.toggle('is-collapsed', isScrolled);
-        searchToggle.setAttribute('aria-expanded', String(!isScrolled));
-        searchToggle.setAttribute('aria-label', isScrolled ? 'Abrir búsqueda' : 'Enfocar búsqueda');
+
+        if (isScrolled !== wasScrolled) {
+          searchControl.classList.toggle('is-collapsed', isScrolled);
+          searchToggle.setAttribute('aria-expanded', String(!isScrolled));
+          searchToggle.setAttribute('aria-label', isScrolled ? 'Abrir búsqueda' : 'Enfocar búsqueda');
+        }
       }
 
       window.addEventListener('scroll', updateNavOnScroll);
@@ -374,7 +422,7 @@
       <!-- Banner de Publicidad Centralizado -->
       <div class="row justify-content-center my-2">
         <div class="col-12 col-md-6 col-lg-5">
-          <a href="#"><img src="Recursos/caliente.jpg" alt="Publicidad Caliente.mx" class="img-fluid rounded mx-auto d-block"></a>
+          <a href="#"><img src="Recursos/caliente1.gif" alt="Publicidad Caliente.mx" class="img-fluid rounded mx-auto d-block"></a>
         </div>
       </div>
 
@@ -387,82 +435,109 @@
         <a href="#" class="text-muted border-start ps-2 text-decoration-none link-danger">La mujer del día</a>
       </div>
 
-      <!-- Grid de contenido principal Sección 1 -->
-      <div class="row g-4">
-        <!-- Noticia Principal (Grande) -->
-        <div class="col-lg-7">
-          <div class="card border-0 mb-3 mb-lg-0">
-            <a href="#"><img src="Recursos/main1.webp" class="card-img-top rounded-0 mb-2 img-fluid" alt="Messi ante Cruz Azul"></a>
-            <div class="card-body px-0 pt-1">
-              <span class="text-danger fw-bold small text-uppercase d-block mb-1">LIGA MX</span>
-              <h2 class="card-title fw-bold fs-3 mb-2">
-                <a href="#" class="text-dark text-decoration-none link-danger">La cuenta pendiente de Messi con México ante Cruz Azul</a>
-              </h2>
-              <p class="card-text text-secondary small fw-semibold">
-                FABIÁN TORRES <span class="ms-1">💬 0</span>
-              </p>
-            </div>
+  <!-- Grid de contenido principal -->
+  <div class="row g-4">
+
+  <!-- Noticia Principal (Grande) -->
+  <div class="col-lg-7">
+    <div class="card border-0 rounded-0">
+      
+      <!-- Contenedor relativo de la imagen y los textos sobrepuestos -->
+      <div class="position-relative">
+        <a href="#">
+          <img src="Recursos/main1.jpg" class="card-img-top rounded-0 img-fluid w-100" alt="Champions League">
+        </a>
+
+        <!-- Badge de categoría superior -->
+        <span class="badge bg-primary rounded-0 fw-bold text-uppercase position-absolute top-0 start-0 m-0 px-2 py-1">CHAMPIONS</span>
+
+        <!-- Textos sobrepuestos en la parte inferior de la imagen -->
+        <div class="position-absolute bottom-0 start-0 p-3 text-white">
+          <p class="small mb-1 text-white">Descubre a los ocho grandes favoritos</p>
+          <h2 class="card-title fw-bold fs-2 mb-0">
+            <a href="#" class="text-white text-decoration-none">¿Cuál es el mejor once para reinar en Europa?</a>
+          </h2>
+        </div>
+      </div>
+
+      <!-- Pie de autores afuera de la foto -->
+      <div class="d-flex justify-content-between align-items-center mt-2 text-secondary extra-small fw-bold">
+        <span class="text-uppercase">RUBÉN JIMÉNEZ / ENRIQUE MEDINA</span>
+        <span class="text-danger">💬 468</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Columna de noticias laterales -->
+  <div class="col-lg-5">
+    <div class="d-flex flex-column gap-3">
+
+      <!-- Noticia Lateral 1 -->
+      <div class="card border-0 border-bottom pb-2 rounded-0">
+        <div class="row g-3 align-items-start">
+          <div class="col-4">
+            <a href="#">
+              <img src="Recursos/desfile.webp" class="img-fluid rounded-0 w-100" alt="Noticia 1">
+            </a>
+          </div>
+          <div class="col-8 ps-0">
+            <span class="text-info fw-bold small text-uppercase d-block mb-1">LALIGA SANTANDER</span>
+            <h6 class="card-title mb-0 fw-bold lh-sm">
+              <a href="#" class="text-dark text-decoration-none">Amenaza de huelga</a>
+            </h6>
           </div>
         </div>
+        <div class="d-flex justify-content-between align-items-center mt-2 pt-1 text-secondary extra-small">
+          <span class="text-uppercase fw-semibold">A. MOGOLLO Y E. BORDA</span>
+          <span class="text-danger fw-bold">💬 306</span>
+        </div>
+      </div>
 
-        <!-- Columna de noticias laterales -->
-        <div class="col-lg-5">
-          <div class="d-flex flex-column gap-3">
-            
-            <!-- Noticia Lateral 1 (Fondo Oscuro) -->
-            <div class="card border-0 bg-dark text-white rounded-0">
-              <div class="row g-0 align-items-center">
-                <div class="col-7 p-3">
-                  <span class="badge bg-warning text-dark mb-2 fw-bold rounded-0">SOCIEDAD</span>
-                  <h6 class="card-title mb-2 fw-bold small">
-                    <a href="#" class="text-white text-decoration-none link-warning">Desfile Militar del 16 de septiembre EN VIVO</a>
-                  </h6>
-                  <p class="card-text text-light opacity-75 small mb-0">DAN FRIDMAN (RAÍZ)</p>
-                </div>
-                <div class="col-5 text-end">
-                  <a href="#"><img src="Recursos/desfile.webp" class="img-fluid rounded-0 w-100" alt="Desfile Militar"></a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Noticia Lateral 2 -->
-            <div class="card border-0 border-bottom pb-3">
-              <div class="row g-3 align-items-center">
-                <div class="col-8 pe-2">
-                  <span class="text-danger fw-bold small text-uppercase d-block mb-1">LIGA MX</span>
-                  <h6 class="card-title mb-1 fw-bold">
-                    <a href="#" class="text-dark text-decoration-none link-danger">Cruz Azul, listo para emular al Canelo en el Día de la Independencia</a>
-                  </h6>
-                  <p class="card-text text-secondary small mb-0">
-                    JORGE ÁVILA <span class="ms-1">💬 0</span>
-                  </p>
-                </div>
-                <div class="col-4">
-                  <a href="#"><img src="Recursos/canelo.webp" class="img-fluid rounded-0" alt="Cruz Azul"></a>
-                </div>
-              </div>
-            </div>
-
-            <!-- Noticia Lateral 3 -->
-            <div class="card border-0">
-              <div class="row g-3 align-items-center">
-                <div class="col-8 pe-2">
-                  <span class="text-danger fw-bold small text-uppercase d-block mb-1">LIGA MX</span>
-                  <h6 class="card-title mb-1 fw-bold">
-                    <a href="#" class="text-dark text-decoration-none link-danger">Erik Lira reconoce y acepta fallas en su intento de fichaje con AS Mónaco</a>
-                  </h6>
-                  <p class="card-text text-secondary small mb-0">
-                    ABIGAIL PARRA <span class="ms-1">💬 0</span>
-                  </p>
-                </div>
-                <div class="col-4">
-                  <a href="#"><img src="Recursos/erik.png" class="img-fluid rounded-0" alt="Erik Lira"></a>
-                </div>
-              </div>
-            </div>
-
+      <!-- Noticia Lateral 2 -->
+      <div class="card border-0 border-bottom pb-2 rounded-0">
+        <div class="row g-3 align-items-start">
+          <div class="col-4">
+            <a href="#">
+              <img src="Recursos/canelo.webp" class="img-fluid rounded-0 w-100" alt="Noticia 2">
+            </a>
+          </div>
+          <div class="col-8 ps-0">
+            <span class="text-info fw-bold small text-uppercase d-block mb-1">FICHAJES</span>
+            <h6 class="card-title mb-0 fw-bold lh-sm">
+              <a href="#" class="text-dark text-decoration-none">Mercado: el 'recambio' de Filipe Luis puede llegar de Alemania</a>
+            </h6>
           </div>
         </div>
+        <div class="d-flex justify-content-end align-items-center mt-2 pt-1 text-secondary extra-small">
+          <span class="text-danger fw-bold">💬 92</span>
+        </div>
+      </div>
+
+      <!-- Noticia Lateral 3 -->
+      <div class="card border-0 border-bottom pb-2 rounded-0">
+        <div class="row g-3 align-items-start">
+          <div class="col-4">
+            <a href="#">
+              <img src="Recursos/erik.png" class="img-fluid rounded-0 w-100" alt="Noticia 3">
+            </a>
+          </div>
+          <div class="col-8 ps-0">
+            <span class="text-info fw-bold small text-uppercase d-block mb-1">REAL MADRID</span>
+            <h6 class="card-title mb-0 fw-bold lh-sm">
+              <a href="#" class="text-dark text-decoration-none">Champions y Liga para el portero titular</a>
+            </h6>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mt-2 pt-1 text-secondary extra-small">
+          <span class="text-uppercase fw-semibold">JOSÉ FÉLIX DÍAZ</span>
+          <span class="text-danger fw-bold">💬 206</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
       </div>
 
     </div>
@@ -474,27 +549,12 @@
   <section id="seccion-2" class="mb-5 border-bottom pb-4">
     <div class="container py-3 px-0">
       
-      <!-- Menú Navegación Sección 2 -->
-      <nav class="navbar navbar-expand-lg navbar-dark bg-danger rounded mb-3 px-3">
-        <div class="container">
-          <a class="navbar-brand fw-bold" href="#">M</a>
-          <div class="navbar-nav me-auto fw-bold flex-row gap-2 gap-md-3">
-            <a class="nav-link text-white" href="#">Fútbol</a>
-            <a class="nav-link text-white" href="#">Baloncesto</a>
-            <a class="nav-link text-white" href="#">Motor</a>
-            <a class="nav-link text-white" href="#">Polideportivo</a>
-            <a class="nav-link text-white" href="#">Más +</a>
-          </div>
-          <button class="btn btn-sm btn-outline-light">🔍</button>
-        </div>
-      </nav>
-
       <!-- 3 Tarjetas destacadas superiores -->
       <div class="row g-3 mb-4">
         <div class="col-md-4">
           <div class="card h-100 border-0">
             <span class="badge bg-info text-white position-absolute top-0 start-0 m-2">FÚTBOL</span>
-            <a href="#"><img src="Recursos/main2.png" class="card-img-top" alt="Noticia Main 2"></a>
+            <a href="#" class="ratio ratio-16x9"><img src="Recursos/main2.webp" class="w-100 h-100 object-fit-cover" alt="Noticia Main 2"></a>
             <div class="card-body px-0">
               <h6 class="card-title fw-bold">
                 <a href="#" class="text-dark text-decoration-none link-danger">Felix Orode, el jugador nigeriano que explica el festejo de Dele Alli</a>
@@ -506,7 +566,7 @@
         <div class="col-md-4">
           <div class="card h-100 border-0">
             <span class="badge bg-primary position-absolute top-0 start-0 m-2">SERIE A</span>
-            <a href="#"><img src="Recursos/main3.png" class="card-img-top" alt="Noticia Main 3"></a>
+            <a href="#" class="ratio ratio-16x9"><img src="Recursos/main3.webp" class="w-100 h-100 object-fit-cover" alt="Noticia Main 3"></a>
             <div class="card-body px-0">
               <h6 class="card-title fw-bold">
                 <a href="#" class="text-dark text-decoration-none link-danger">Cristiano habla sobre Cuadrado y la cesión del número 7</a>
@@ -518,7 +578,7 @@
         <div class="col-md-4">
           <div class="card h-100 border-0">
             <span class="badge bg-primary position-absolute top-0 start-0 m-2">MÉXICO</span>
-            <a href="#"><img src="Recursos/main4.png" class="card-img-top" alt="Noticia Main 4"></a>
+            <a href="#" class="ratio ratio-16x9"><img src="Recursos/main4.webp" class="w-100 h-100 object-fit-cover" alt="Noticia Main 4"></a>
             <div class="card-body px-0">
               <h6 class="card-title fw-bold">
                 <a href="#" class="text-dark text-decoration-none link-danger">La joya celeste que hace soñar a Cruz Azul</a>
@@ -528,18 +588,24 @@
         </div>
       </div>
 
+    </div>
+
       <!-- Barra "Es noticia" -->
-      <div class="bg-light p-2 rounded mb-4 d-flex align-items-center gap-3 overflow-auto small text-nowrap">
-        <span class="fw-bold text-danger">Es noticia:</span>
-        <a href="#" class="text-decoration-none text-dark fw-semibold link-danger">Desfile Militar EN VIVO</a>
-        <a href="#" class="text-decoration-none text-secondary link-danger">Inter Miami vs Cruz Azul</a>
-        <a href="#" class="text-decoration-none text-secondary link-danger">Olympiacos vs Jagiellonia</a>
-        <a href="#" class="text-decoration-none text-secondary link-danger">Sunderland vs AZ Alkmaar</a>
-        <a href="#" class="text-decoration-none text-secondary link-danger">Everton vs Wolverhampton</a>
-        <a href="#" class="text-decoration-none text-secondary link-danger">Atlético de Madrid vs Osasuna</a>
-        <a href="#" class="text-decoration-none text-secondary link-danger">Barcelona vs Racing</a>
-        <a href="#" class="text-decoration-none text-secondary link-danger">Calendario F1 2027</a>
+      <div class="w-100 p-2 mb-4 small">
+        <div class="row justify-content-center align-items-center g-2">
+          <span class="col-auto fw-bold text-danger">Es noticia:</span>
+          <a href="#" class="col-auto text-decoration-none text-dark fw-semibold link-danger">Desfile Militar EN VIVO</a>
+          <a href="#" class="col-auto text-decoration-none text-secondary link-danger">Inter Miami vs Cruz Azul</a>
+          <a href="#" class="col-auto text-decoration-none text-secondary link-danger">Olympiacos vs Jagiellonia</a>
+          <a href="#" class="col-auto text-decoration-none text-secondary link-danger">Sunderland vs AZ Alkmaar</a>
+          <a href="#" class="col-auto text-decoration-none text-secondary link-danger">Everton vs Wolverhampton</a>
+          <a href="#" class="col-auto text-decoration-none text-secondary link-danger">Atlético de Madrid vs Osasuna</a>
+          <a href="#" class="col-auto text-decoration-none text-secondary link-danger">Barcelona vs Racing</a>
+          <a href="#" class="col-auto text-decoration-none text-secondary link-danger">Calendario F1 2027</a>
+        </div>
       </div>
+
+      <div class="container py-3 px-0">
 
       <!-- Bloque inferior de la Sección 2 -->
       <div class="row g-3">
@@ -547,7 +613,7 @@
           
           <div class="card border-0 mb-3">
             <span class="badge bg-primary w-auto mb-2 align-self-start">LALIGA SANTANDER</span>
-            <a href="#"><img src="Recursos/main5.png" class="card-img-top rounded" alt="Noticia Main 5"></a>
+            <a href="#"><img src="Recursos/main5.jpg" class="card-img-top rounded" alt="Noticia Main 5"></a>
             <div class="card-body px-0">
               <h5 class="card-title fw-bold">
                 <a href="#" class="text-dark text-decoration-none link-danger">¿Qué equipos y qué jugadores estuvieron en la reunión de la AFE?</a>
