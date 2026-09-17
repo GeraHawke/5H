@@ -95,21 +95,21 @@
     
     <!-- Encabezado superior -->
     <div class="container pt-3 px-0">
-      <div class="d-flex justify-content-between align-items-center mb-2 flex-wrap gap-2 border-bottom pb-2">
+      <div class="row align-items-center g-2 mb-2 border-bottom pb-2">
         
         <!-- Iconos e imágenes superiores envueltos en hipervínculos -->
-        <div class="d-flex align-items-center gap-3 flex-wrap">
+        <div class="col-12 col-md-4 d-flex align-items-center justify-content-center justify-content-md-start gap-3 flex-wrap">
           <a href="#"><img src="Recursos/mini1.png" alt="Mini Icono 1" class="img-fluid"></a>
           <a href="#"><img src="Recursos/mini2.png" alt="Mini Icono 2" class="img-fluid"></a>
           <a href="#"><img src="Recursos/mini3.png" alt="Mini Icono 3" class="img-fluid"></a>
         </div>
 
-        <div class="d-flex justify-content-center flex-grow-1">
+        <div class="col-12 col-md-4 text-center">
           <a href="#"><img src="Recursos/mini4.png" alt="MARCA" class="img-fluid"></a>
         </div>
 
         <!-- Selector de Edición / Idioma y botones de usuario -->
-        <div class="d-flex align-items-center gap-2">
+        <div class="col-12 col-md-4 d-flex align-items-center justify-content-center justify-content-md-end gap-2 flex-wrap">
           <div class="dropdown position-relative" style="z-index: 1040;">
             <button class="btn btn-outline-secondary btn-sm dropdown-toggle rounded-pill fw-semibold d-flex align-items-center gap-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="Recursos/banderamex.webp" alt="México" height="14" class="rounded-1"> México
@@ -133,10 +133,10 @@
     <!-- ================================================================= -->
     <div class="sticky-top">
       <nav class="navbar navbar-expand-lg navbar-dark bg-danger py-1 main-nav-bar" id="mainNavBar">
-        <div class="container d-flex justify-content-center align-items-center flex-wrap gap-2 gap-md-3">
+        <div class="container row mx-auto justify-content-center align-items-center g-2">
           
           <!-- Enlaces principales centrados junto con el botón Más + -->
-          <div class="navbar-nav fw-bold gap-2 gap-md-3 flex-row flex-wrap align-items-center small">
+          <div class="col-12 col-lg navbar-nav fw-bold gap-2 gap-md-3 flex-row flex-wrap justify-content-center align-items-center small">
             
             <!-- Fútbol (Dropdown) -->
             <div class="nav-item dropdown">
@@ -198,13 +198,13 @@
           </div>
 
           <!-- Acciones que aparecen cuando la navbar se compacta al hacer scroll -->
-          <div class="scroll-user-actions d-flex align-items-center gap-2 order-2 order-lg-3">
+          <div class="col-auto scroll-user-actions d-flex align-items-center gap-2 order-2 order-lg-3">
             <button class="btn btn-danger border border-light btn-sm fw-bold text-nowrap scroll-subscribe" type="button">Suscríbete</button>
             <button class="btn btn-light btn-sm text-nowrap scroll-login" type="button">Iniciar sesión</button>
           </div>
 
           <!-- Búsqueda abierta normalmente y compacta al hacer scroll -->
-          <div class="d-flex align-items-center gap-2 ms-auto ms-lg-0">
+          <div class="col-auto d-flex align-items-center gap-2 ms-auto ms-lg-0">
             <div class="search-control d-flex align-items-center position-relative" id="searchControl">
               <input type="search" class="form-control form-control-sm rounded-0 px-3 pe-5" placeholder="Buscar en marca.com" aria-label="Buscar en marca.com">
               <button class="search-toggle btn btn-link text-white position-absolute end-0 top-50 translate-middle-y p-0" id="searchToggle" type="button" aria-label="Enfocar búsqueda" aria-expanded="true">
@@ -476,7 +476,7 @@
       
       <!-- Menú Navegación Sección 2 -->
       <nav class="navbar navbar-expand-lg navbar-dark bg-danger rounded mb-3 px-3">
-        <div class="container-fluid">
+        <div class="container">
           <a class="navbar-brand fw-bold" href="#">M</a>
           <div class="navbar-nav me-auto fw-bold flex-row gap-2 gap-md-3">
             <a class="nav-link text-white" href="#">Fútbol</a>
