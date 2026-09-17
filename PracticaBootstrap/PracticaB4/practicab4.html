@@ -29,6 +29,84 @@
       height: auto;
     }
 
+    .agenda-bar {
+      display: grid;
+      grid-template-columns: auto auto minmax(150px, 1fr) auto minmax(150px, 1fr) auto;
+      border-bottom: 1px solid var(--bs-border-color);
+      min-height: 48px;
+    }
+
+    .agenda-title,
+    .agenda-block,
+    .agenda-more {
+      display: flex;
+      align-items: center;
+      padding: 0.35rem 0.75rem;
+    }
+
+    .agenda-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .agenda-live,
+    .agenda-featured {
+      display: flex;
+      align-items: center;
+      padding: 0.35rem 0.75rem;
+      color: #fff;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .agenda-live {
+      background-color: var(--bs-danger);
+    }
+
+    .agenda-featured {
+      background-color: var(--bs-danger);
+    }
+
+    .agenda-block {
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      background-color: var(--bs-light);
+      color: var(--bs-dark);
+      font-size: 0.8rem;
+      line-height: 1.1;
+    }
+
+    .agenda-block strong {
+      font-size: 0.85rem;
+    }
+
+    .agenda-more {
+      justify-content: flex-end;
+      gap: 0.4rem;
+      color: var(--bs-secondary-color);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 767.98px) {
+      .agenda-bar {
+        grid-template-columns: auto 1fr auto;
+      }
+
+      .agenda-title {
+        grid-column: span 3;
+        padding-left: 0;
+      }
+
+      .agenda-more {
+        grid-column: span 3;
+        justify-content: flex-start;
+        padding-left: 0;
+      }
+    }
+
     .main-nav-bar.is-scrolled {
       box-shadow: 0 3px 12px rgba(0, 0, 0, 0.18);
     }
@@ -420,23 +498,32 @@
       </div>
 
       <!-- Banner de Publicidad Centralizado -->
-      <div class="row justify-content-center my-2">
+      <div class="row justify-content-center my-3 mb-4">
         <div class="col-12 col-md-6 col-lg-5">
           <a href="#"><img src="Recursos/caliente1.gif" alt="Publicidad Caliente.mx" class="img-fluid rounded mx-auto d-block"></a>
         </div>
       </div>
 
-      <!-- Submenú de Agenda / Directos -->
-      <div class="d-flex align-items-center justify-content-start gap-2 border-bottom pb-2 mb-3 small overflow-auto text-nowrap">
-        <span class="fw-bold me-2 text-danger">Agenda</span>
-        <span class="badge bg-danger">En directo</span>
-        <a href="#" class="text-muted border-start ps-2 text-decoration-none link-danger">Todas las noticias</a>
-        <a href="#" class="text-muted border-start ps-2 text-decoration-none link-danger">Última hora</a>
-        <a href="#" class="text-muted border-start ps-2 text-decoration-none link-danger">La mujer del día</a>
+      <!-- Agenda de directos -->
+      <div class="agenda-bar mt-2 mb-4 small">
+        <span class="agenda-title">Agenda</span>
+        <span class="agenda-live">En directo</span>
+        <a href="#" class="agenda-block text-decoration-none">
+          <span>Todas las noticias</span>
+          <strong>Última hora</strong>
+        </a>
+        <span class="agenda-featured">Lo mejor del día</span>
+        <a href="#" class="agenda-block text-decoration-none">
+          <span>Agenda</span>
+          <strong>Jueves 23</strong>
+        </a>
+        <a href="#" class="agenda-more">
+          Ver más directos <i class="bi bi-chevron-down"></i>
+        </a>
       </div>
 
   <!-- Grid de contenido principal -->
-  <div class="row g-4">
+  <div class="row g-4 mt-2">
 
   <!-- Noticia Principal (Grande) -->
   <div class="col-lg-7">
@@ -478,7 +565,7 @@
         <div class="row g-3 align-items-start">
           <div class="col-4">
             <a href="#">
-              <img src="Recursos/desfile.webp" class="img-fluid rounded-0 w-100" alt="Noticia 1">
+              <img src="Recursos/huelga.jpg" class="img-fluid rounded-0 w-100" alt="Noticia 1">
             </a>
           </div>
           <div class="col-8 ps-0">
@@ -499,7 +586,7 @@
         <div class="row g-3 align-items-start">
           <div class="col-4">
             <a href="#">
-              <img src="Recursos/canelo.webp" class="img-fluid rounded-0 w-100" alt="Noticia 2">
+              <img src="Recursos/sevilla.jpg" class="img-fluid rounded-0 w-100" alt="Noticia 2">
             </a>
           </div>
           <div class="col-8 ps-0">
@@ -519,7 +606,7 @@
         <div class="row g-3 align-items-start">
           <div class="col-4">
             <a href="#">
-              <img src="Recursos/erik.png" class="img-fluid rounded-0 w-100" alt="Noticia 3">
+              <img src="Recursos/titular.jpg" class="img-fluid rounded-0 w-100" alt="Noticia 3">
             </a>
           </div>
           <div class="col-8 ps-0">
