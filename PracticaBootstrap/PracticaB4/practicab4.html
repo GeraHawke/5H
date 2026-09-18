@@ -186,6 +186,25 @@
       color: var(--bs-secondary-color) !important;
     }
 
+    .site-footer-links {
+      background-color: #222;
+    }
+
+    .site-footer-meta {
+      background-color: #fff;
+      color: #111;
+    }
+
+    .site-footer-meta a {
+      color: #111;
+    }
+
+    .footer-social-logo {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
     @media (min-width: 992px) {
       .main-nav-bar > .container {
         flex-wrap: nowrap;
@@ -760,12 +779,13 @@
   <!-- SECCIÓN 3 (Pie de Página / Footer)                                -->
   <!-- ================================================================= -->
   <section id="seccion-3">
-    <footer class="bg-dark text-white pt-5 pb-4">
-      <div class="container">
-        
-        <h5 class="text-center mb-4 text-light fw-bold border-bottom border-secondary pb-3">Otras webs de Unidad Editorial</h5>
+    <footer>
+      <div class="site-footer-links text-white pt-4 pb-4">
+        <div class="container">
 
-        <div class="row g-4 mb-4 small text-secondary text-center text-md-start">
+          <h5 class="text-center mb-4 text-light fw-bold border-bottom border-secondary pb-3">Otras webs de Unidad Editorial</h5>
+
+          <div class="row g-4 small text-secondary text-center text-md-start">
           
           <div class="col-6 col-md-3">
             <h6 class="text-white fw-bold mb-3">Marca</h6>
@@ -817,24 +837,33 @@
             </ul>
           </div>
 
-        </div>
-
-        <div class="border-top border-secondary pt-4 text-center small text-secondary">
-          <p class="mb-2">© Unidad Editorial Información Deportiva, S.L.U. Todos los derechos reservados.</p>
-          <div class="d-flex justify-content-center flex-wrap gap-2 mb-3">
-            <a href="#" class="text-secondary text-decoration-none link-light">Términos y condiciones de uso</a> |
-            <a href="#" class="text-secondary text-decoration-none link-light">Política de privacidad</a> |
-            <a href="#" class="text-secondary text-decoration-none link-light">Política de cookies</a> |
-            <a href="#" class="text-secondary text-decoration-none link-light">Certificado por OJD</a> |
-            <a href="#" class="text-secondary text-decoration-none link-light">Contacto</a> |
-            <a href="#" class="text-secondary text-decoration-none link-light">Publicidad</a> |
-            <a href="#" class="text-secondary text-decoration-none link-light">Ayuda</a> |
-            <a href="#" class="text-secondary text-decoration-none link-light">Nuestro equipo</a> |
-            <a href="#" class="text-secondary text-decoration-none link-light">Venta de contenidos</a>
           </div>
-          <p class="mb-0">Síguenos en</p>
         </div>
+      </div>
 
+      <div class="site-footer-meta pt-3 pb-4">
+        <div class="container text-center small">
+          <p class="mb-2 fw-semibold">© Unidad Editorial Información Deportiva, S.L.U. Todos los derechos reservados.</p>
+          <div class="d-flex justify-content-center flex-wrap gap-2 mb-4">
+            <a href="#" class="text-decoration-none">Términos y condiciones de uso</a>
+            <a href="#" class="text-decoration-none">Política de privacidad</a>
+            <a href="#" class="text-decoration-none">Política de cookies</a>
+            <a href="#" class="text-decoration-none">Certificado por OJD</a>
+            <a href="#" class="text-decoration-none">Contacto</a>
+            <a href="#" class="text-decoration-none">Publicidad</a>
+            <a href="#" class="text-decoration-none">Ayuda</a>
+            <a href="#" class="text-decoration-none">Nuestro equipo</a>
+            <a href="#" class="text-decoration-none">Venta de contenidos</a>
+          </div>
+
+          <p class="mb-2 fw-semibold">Síguenos en</p>
+          <div class="d-flex justify-content-center align-items-center gap-3">
+            <a href="#" aria-label="Facebook"><img src="Recursos/logo1.png" alt="Facebook" class="footer-social-logo"></a>
+            <a href="#" aria-label="Twitter"><img src="Recursos/logo2.png" alt="Twitter" class="footer-social-logo"></a>
+            <a href="#" aria-label="Google Plus"><img src="Recursos/logo3.png" alt="Google Plus" class="footer-social-logo"></a>
+            <a href="#" aria-label="RSS"><img src="Recursos/logo4.png" alt="RSS" class="footer-social-logo"></a>
+          </div>
+        </div>
       </div>
     </footer>
   </section>
