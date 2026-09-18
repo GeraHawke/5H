@@ -90,6 +90,19 @@
       white-space: nowrap;
     }
 
+    .agenda-more .dropdown-toggle {
+      color: var(--bs-secondary-color);
+      text-decoration: none;
+    }
+
+    .agenda-more .dropdown-menu {
+      min-width: 210px;
+    }
+
+    #menuMas.show {
+      z-index: 1040 !important;
+    }
+
     @media (max-width: 767.98px) {
       .agenda-bar {
         grid-template-columns: auto 1fr auto;
@@ -203,6 +216,11 @@
       width: 32px;
       height: 32px;
       object-fit: contain;
+    }
+
+    .lunin-rodrigo-image {
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
     }
 
     @media (min-width: 992px) {
@@ -452,6 +470,15 @@
           btnMenuMas.classList.remove('bg-light', 'text-dark');
           btnMenuMas.classList.add('btn-danger', 'text-white');
         });
+
+        document.addEventListener('click', function (event) {
+          const clickedInsideMenu = menuMas.contains(event.target);
+          const clickedButton = btnMenuMas.contains(event.target);
+
+          if (!clickedInsideMenu && !clickedButton && menuMas.classList.contains('show')) {
+            bootstrap.Collapse.getOrCreateInstance(menuMas).hide();
+          }
+        });
       }
 
       const mainNavBar = document.getElementById('mainNavBar');
@@ -536,9 +563,16 @@
           <span>Agenda</span>
           <strong>Jueves 23</strong>
         </a>
-        <a href="#" class="agenda-more">
-          Ver más directos <i class="bi bi-chevron-down"></i>
-        </a>
+        <div class="agenda-more dropdown">
+          <button class="btn btn-link dropdown-toggle p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Ver más directos
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+            <li><a class="dropdown-item" href="#">Ver selección mexicana</a></li>
+            <li><a class="dropdown-item" href="#">Ver selección española</a></li>
+            <li><a class="dropdown-item" href="#">Ver selección argentina</a></li>
+          </ul>
+        </div>
       </div>
 
   <!-- Grid de contenido principal -->
@@ -713,63 +747,77 @@
 
       <div class="container py-3 px-0">
 
-      <!-- Bloque inferior de la Sección 2 -->
-      <div class="row g-3">
-        <div class="col-lg-8">
-          
-          <div class="card border-0 mb-3">
-            <span class="badge bg-primary w-auto mb-2 align-self-start">LALIGA SANTANDER</span>
-            <a href="#"><img src="Recursos/main5.jpg" class="card-img-top rounded" alt="Noticia Main 5"></a>
-            <div class="card-body px-0">
-              <h5 class="card-title fw-bold">
-                <a href="#" class="text-dark text-decoration-none link-danger">¿Qué equipos y qué jugadores estuvieron en la reunión de la AFE?</a>
-              </h5>
-            </div>
-          </div>
-
-          <div class="row g-3">
-            <div class="col-md-6">
-              <div class="card border-0">
-                <span class="badge bg-primary w-auto mb-1 align-self-start">REAL MADRID</span>
-                <a href="#"><img src="Recursos/lunin.jpg" class="card-img-top rounded" alt="Noticia Lateral 4"></a>
-                <div class="card-body px-0">
-                  <h6 class="card-title fw-bold">
-                    <a href="#" class="text-dark text-decoration-none link-danger">Lunin, muy cerca de irse cedido al Leganés</a>
-                  </h6>
-                </div>
+      <!-- Noticias horizontales de LaLiga y Sevilla -->
+      <div class="row g-4 mb-4">
+        <div class="col-12 col-lg-4">
+          <article class="border-bottom pb-2 h-100">
+            <div class="row g-3 align-items-start">
+              <div class="col-5">
+                <a href="#"><img src="Recursos/main5.jpg" class="img-fluid w-100" alt="Reunión de la AFE"></a>
+              </div>
+              <div class="col-7">
+                <span class="text-info fw-bold small text-uppercase d-block mb-1">LALIGA SANTANDER</span>
+                <h5 class="fw-bold lh-sm mb-0">
+                  <a href="#" class="text-dark text-decoration-none link-danger">¿Qué equipos y qué jugadores estuvieron en la reunión de la AFE?</a>
+                </h5>
               </div>
             </div>
-
-            <div class="col-md-6">
-              <div class="card border-0">
-                <span class="badge bg-primary w-auto mb-1 align-self-start">REAL MADRID</span>
-                <a href="#"><img src="Recursos/rodrigo.avif" class="card-img-top rounded" alt="Noticia Lateral 5"></a>
-                <div class="card-body px-0">
-                  <h6 class="card-title fw-bold">
-                    <a href="#" class="text-dark text-decoration-none link-danger">Algo pasa con Rodrigo</a>
-                  </h6>
-                </div>
-              </div>
+            <div class="d-flex justify-content-end align-items-center mt-2 pt-1 text-secondary extra-small">
+              <span class="text-danger fw-bold">💬 14</span>
             </div>
-          </div>
-
+          </article>
         </div>
 
-        <div class="col-lg-4">
-          <div class="card border-0">
-            <div class="row g-3 align-items-center">
-              <div class="col-8 pe-2">
-                <span class="badge bg-danger mb-1">SEVILLA FC</span>
-                <h6 class="card-title mb-0 fw-bold">
+        <div class="d-none d-lg-block col-lg-4" aria-hidden="true"></div>
+
+        <div class="col-12 col-lg-4">
+          <article class="border-bottom pb-3 h-100">
+            <div class="row g-3 align-items-start">
+              <div class="col-5">
+                <a href="#"><img src="Recursos/sevilla2.jpg" class="img-fluid w-100" alt="Draxler y Martial"></a>
+              </div>
+              <div class="col-7 ps-0">
+                <span class="text-info fw-bold small text-uppercase d-block mb-1">SEVILLA FC</span>
+                <h5 class="fw-bold lh-sm mb-0">
                   <a href="#" class="text-dark text-decoration-none link-danger">Draxler y Martial, nombres top en la recta final del mercado</a>
-                </h6>
+                </h5>
               </div>
-              <div class="col-4">
-                <a href="#"><img src="Recursos/sevilla2.jpg" class="img-fluid rounded" alt="Noticia Lateral 6"></a>
-              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mt-2 pt-1 text-secondary extra-small">
+              <span class="text-uppercase">ROCÍO GUEVARA SEVILLA</span>
+              <span class="text-danger fw-bold">💬 64</span>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- Noticias de Lunin y Rodrigo -->
+      <div class="row g-3">
+        <div class="col-12 col-lg-4">
+          <div class="card border-0">
+            <span class="badge bg-primary w-auto mb-1 align-self-start">REAL MADRID</span>
+            <a href="#"><img src="Recursos/lunin.jpg" class="card-img-top rounded w-100 lunin-rodrigo-image" alt="Noticia Lateral 4"></a>
+            <div class="card-body px-0">
+              <h6 class="card-title fw-bold">
+                <a href="#" class="text-dark text-decoration-none link-danger">Lunin, muy cerca de irse cedido al Leganés</a>
+              </h6>
             </div>
           </div>
         </div>
+
+        <div class="col-12 col-lg-4">
+          <div class="card border-0">
+            <span class="badge bg-primary w-auto mb-1 align-self-start">REAL MADRID</span>
+            <a href="#"><img src="Recursos/rodrigo.avif" class="card-img-top rounded w-100 lunin-rodrigo-image" alt="Noticia Lateral 5"></a>
+            <div class="card-body px-0">
+              <h6 class="card-title fw-bold">
+                <a href="#" class="text-dark text-decoration-none link-danger">Algo pasa con Rodrigo</a>
+              </h6>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-none d-lg-block col-lg-4" aria-hidden="true"></div>
       </div>
 
     </div>
