@@ -18,15 +18,33 @@
       height: auto;
     }
 
-    .top-mini-icons a {
-      flex: 1 1 0;
+    .top-mini-item {
+      display: flex;
+      flex: 0 1 auto;
+      align-items: center;
       min-width: 0;
-      text-align: center;
+      gap: 0.35rem;
+      color: #111;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
     }
 
-    .top-mini-icons img {
-      width: min(100%, 125px);
-      height: auto;
+    .top-mini-item img {
+      width: clamp(28px, 3vw, 42px);
+      height: clamp(28px, 3vw, 42px);
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+
+    .top-mini-icons {
+      min-width: 0;
+    }
+
+    .top-mini-icons a {
+      min-width: 0;
+      text-align: center;
     }
 
     .agenda-bar {
@@ -218,6 +236,43 @@
       object-fit: contain;
     }
 
+    .extra-small {
+      font-size: 0.7rem;
+    }
+
+    .side-news-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      text-decoration: none !important;
+      transition: color 0.15s ease;
+    }
+
+    .side-news-title:hover {
+      color: var(--bs-danger) !important;
+      text-decoration: none !important;
+    }
+
+    .hero-kicker {
+      font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+      font-weight: 500;
+      line-height: 1.2;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+    }
+
+    .hero-title-link {
+      display: inline-block;
+      font-size: clamp(2.1rem, 4vw, 3.5rem);
+      font-weight: 600;
+      line-height: 1;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.85);
+      transition: color 0.15s ease;
+    }
+
+    .hero-title-link:hover {
+      color: #d9eaff !important;
+      text-decoration: none;
+    }
+
     .lunin-rodrigo-image {
       aspect-ratio: 16 / 9;
       object-fit: cover;
@@ -230,6 +285,16 @@
     }
 
     @media (max-width: 575.98px) {
+      .top-mini-item {
+        gap: 0.2rem;
+        font-size: 0.65rem;
+      }
+
+      .top-mini-item img {
+        width: 28px;
+        height: 28px;
+      }
+
       .main-nav-bar.is-scrolled .scroll-user-actions {
         max-width: 180px;
       }
@@ -246,17 +311,45 @@
   <!-- SECCIÓN 1                                                         -->
   <!-- ================================================================= -->
   <section id="seccion-1" class="mb-5 pb-4">
-    
+
     <!-- Encabezado superior -->
     <div class="container pt-3 px-0">
       <div class="row align-items-center g-2 mb-2 border-bottom pb-2">
-        
+
         <!-- Iconos e imágenes superiores envueltos en hipervínculos -->
         <div class="col-12 col-md-4 top-mini-icons d-flex align-items-center justify-content-center gap-2 flex-nowrap">
-          <a href="#"><img src="Recursos/mini1.png" alt="Mini Icono 1"></a>
-          <a href="#"><img src="Recursos/mini2.png" alt="Mini Icono 2"></a>
-          <a href="#"><img src="Recursos/mini3.png" alt="Mini Icono 3"></a>
-        </div>
+  
+  <!-- Ítem 1 -->
+  <a href="#" class="top-mini-item d-flex align-items-center gap-2 text-decoration-none text-dark fw-bold">
+    <img src="Recursos/diario.avif" alt="La Portada de hoy" height="32">
+    <span class="lh-sm small text-start" style="font-weight: 700;">
+      La portada<br>de hoy
+    </span>
+  </a>
+
+  <!-- Divisor vertical -->
+  <div class="border-end opacity-50" style="height: 24px;"></div>
+
+  <!-- Ítem 2 -->
+  <a href="#" class="top-mini-item d-flex align-items-center gap-2 text-decoration-none text-dark fw-bold">
+    <img src="Recursos/radiomarca.svg" alt="Radio MARCA" height="32">
+    <span class="lh-sm small text-start" style="font-weight: 700;">
+      Radio<br>MARCA
+    </span>
+  </a>
+
+  <!-- Divisor vertical -->
+  <div class="border-end opacity-50" style="height: 24px;"></div>
+
+  <!-- Ítem 3 -->
+  <a href="#" class="top-mini-item d-flex align-items-center gap-2 text-decoration-none text-dark fw-bold">
+    <img src="Recursos/trending.png" alt="LaLiga Fantasy MARCA" height="32">
+    <span class="lh-sm small text-start" style="font-weight: 700;">
+      LaLiga Fantasy<br>MARCA
+    </span>
+  </a>
+
+</div>
 
         <div class="col-12 col-md-4 text-center">
           <a href="#"><img src="Recursos/marca1.webp" alt="MARCA" class="main-brand-logo"></a>
@@ -266,14 +359,46 @@
         <div class="col-12 col-md-4 d-flex align-items-center justify-content-center justify-content-md-end gap-2 flex-wrap">
           <div class="dropdown position-relative" style="z-index: 1040;">
             <button class="btn btn-outline-secondary btn-sm dropdown-toggle rounded-pill fw-semibold d-flex align-items-center gap-1" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="Recursos/banderamex.webp" alt="México" height="14" class="rounded-1"> México
+              <img src="Recursos/banderaspain.png" alt="España" height="14" class="rounded-1"> ES
             </button>
             <ul class="dropdown-menu dropdown-menu-end small rounded-3 shadow-sm z-3">
               <li><h6 class="dropdown-header">EDICIONES:</h6></li>
-              <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><img src="Recursos/banderaspain.png" alt="España" height="14" class="rounded-1"> España</a></li>
-              <li><a class="dropdown-item active bg-primary d-flex align-items-center gap-2" href="#"><img src="Recursos/banderamex.webp" alt="México" height="14" class="rounded-1"> México</a></li>
-              <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><img src="Recursos/banderausa.png" alt="USA" height="14" class="rounded-1"> USA - English</a></li>
-              <li><a class="dropdown-item d-flex align-items-center gap-2" href="#"><img src="Recursos/banderausa.png" alt="USA" height="14" class="rounded-1"> USA - Español</a></li>
+<li>
+  <a class="dropdown-item d-flex align-items-center gap-2" href="#">
+    <!-- Columna 1: Contenedor flex centrado para la bandera sin deformarla -->
+    <span class="d-flex justify-content-center align-items-center" style="width: 24px;">
+      <img src="Recursos/banderamex.webp" alt="México" height="14" class="rounded-1">
+    </span>
+    <!-- Columna 2: Código de país (Ancho fijo, texto a la izquierda) -->
+    <span style="width: 28px;" class="fw-semibold">MX</span>
+    <!-- Columna 3: Guion divisor -->
+    <span class="text-muted">-</span>
+    <!-- Columna 4: Nombre del idioma/país -->
+    <span>Español</span>
+  </a>
+</li>
+
+<li>
+  <a class="dropdown-item active bg-primary d-flex align-items-center gap-2" href="#">
+    <span class="d-flex justify-content-center align-items-center" style="width: 24px;">
+      <img src="Recursos/banderaspain.png" alt="España" height="15" class="rounded-1">
+    </span>
+    <span style="width: 28px;" class="fw-semibold">ES</span>
+    <span class="text-white-50">-</span>
+    <span>España</span>
+  </a>
+</li>
+
+<li>
+  <a class="dropdown-item d-flex align-items-center gap-2" href="#">
+    <span class="d-flex justify-content-center align-items-center" style="width: 24px;">
+      <img src="Recursos/banderausa.png" alt="USA" height="13" class="rounded-1">
+    </span>
+    <span style="width: 28px;" class="fw-semibold">USA</span>
+    <span class="text-muted">-</span>
+    <span>English</span>
+  </a>
+</li>
             </ul>
           </div>
           <button class="btn btn-danger btn-sm fw-bold">Suscríbete</button>
@@ -288,14 +413,14 @@
     <div class="sticky-top">
       <nav class="navbar navbar-expand-lg navbar-dark bg-danger py-1 main-nav-bar" id="mainNavBar">
         <div class="container row mx-auto justify-content-center align-items-center g-2">
-          
+
           <!-- Enlaces principales centrados junto con el botón Más + -->
           <div class="col-12 col-lg navbar-nav fw-bold gap-2 gap-md-3 flex-row flex-wrap justify-content-center align-items-center small">
 
             <a href="#" class="scroll-brand" aria-label="MARCA">
               <img src="Recursos/marca-m.jpg" alt="MARCA" class="img-fluid h-100">
             </a>
-            
+
             <!-- Fútbol (Dropdown) -->
             <div class="nav-item dropdown">
               <a class="nav-link text-white dropdown-toggle py-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -377,7 +502,7 @@
       <!-- Megamenú Desplegable "Más +" (Posicionamiento Flotante sobre el contenido) -->
       <div class="collapse position-absolute top-100 start-0 w-100 bg-body-tertiary border-bottom shadow z-3" id="menuMas">
         <div class="container py-4">
-          
+
           <!-- Encabezado del megamenú -->
           <div class="d-flex align-items-center gap-2 mb-4 fw-bold">
             <span class="text-danger fs-4">#</span>
@@ -388,7 +513,7 @@
 
           <!-- Contenido de secciones desplegadas -->
           <div class="row g-4">
-            
+
             <!-- Columna 1: Más secciones -->
             <div class="col-6 col-md-3">
               <h6 class="fw-bold text-secondary mb-3">Más secciones</h6>
@@ -519,7 +644,7 @@
 
     <!-- Contenido debajo de la cinta roja -->
     <div class="container py-3 px-0">
-      
+
       <!-- Sub-barra de escudos/equipos centrada y con hipervínculos -->
       <div class="d-flex align-items-center justify-content-center gap-2 border-bottom pb-2 mb-3 overflow-auto flex-nowrap p-1">
         <a href="#"><img src="Recursos/mini5.png" alt="Equipo 5" class="img-fluid"></a>
@@ -581,11 +706,11 @@
   <!-- Noticia Principal (Grande) -->
   <div class="col-lg-7">
     <div class="card border-0 rounded-0">
-      
+
       <!-- Contenedor relativo de la imagen y los textos sobrepuestos -->
       <div class="position-relative">
         <a href="#">
-          <img src="Recursos/main1.jpg" class="card-img-top rounded-0 img-fluid w-100" alt="Champions League">
+          <img src="Recursos/once.png" class="card-img-top rounded-0 img-fluid w-100" alt="Champions League">
         </a>
 
         <!-- Badge de categoría superior -->
@@ -593,9 +718,9 @@
 
         <!-- Textos sobrepuestos en la parte inferior de la imagen -->
         <div class="position-absolute bottom-0 start-0 p-3 text-white">
-          <p class="small mb-1 text-white">Descubre a los ocho grandes favoritos</p>
+          <p class="hero-kicker mb-1 text-white">Descubre a los ocho grandes favoritos</p>
           <h2 class="card-title fw-bold fs-2 mb-0">
-            <a href="#" class="text-white text-decoration-none">¿Cuál es el mejor once para reinar en Europa?</a>
+            <a href="#" class="text-white text-decoration-none hero-title-link">¿Cuál es el mejor once para reinar en Europa?</a>
           </h2>
         </div>
       </div>
@@ -622,9 +747,9 @@
             </a>
           </div>
           <div class="col-8 ps-0">
-            <span class="text-info fw-bold small text-uppercase d-block mb-1">LALIGA SANTANDER</span>
+            <span class="text-info fw-bold small text-uppercase d-block mb-1 mx-2">LALIGA SANTANDER</span>
             <h6 class="card-title mb-0 fw-bold lh-sm">
-              <a href="#" class="text-dark text-decoration-none">Amenaza de huelga</a>
+              <a href="#" class="text-dark text-decoration-none side-news-title fs-4 mx-2 fw-bold">Amenaza de huelga</a>
             </h6>
           </div>
         </div>
@@ -634,46 +759,46 @@
         </div>
       </div>
 
-      <!-- Noticia Lateral 2 -->
-      <div class="card border-0 border-bottom pb-2 rounded-0">
-        <div class="row g-3 align-items-start">
-          <div class="col-4">
-            <a href="#">
-              <img src="Recursos/sevilla.jpg" class="img-fluid rounded-0 w-100" alt="Noticia 2">
-            </a>
-          </div>
-          <div class="col-8 ps-0">
-            <span class="text-info fw-bold small text-uppercase d-block mb-1">FICHAJES</span>
-            <h6 class="card-title mb-0 fw-bold lh-sm">
-              <a href="#" class="text-dark text-decoration-none">Mercado: el 'recambio' de Filipe Luis puede llegar de Alemania</a>
-            </h6>
-          </div>
-        </div>
-        <div class="d-flex justify-content-end align-items-center mt-2 pt-1 text-secondary extra-small">
-          <span class="text-danger fw-bold">💬 92</span>
-        </div>
-      </div>
+    <!-- Noticia Lateral 2 -->
+<div class="card border-0 border-bottom pb-2 rounded-0">
+  <div class="row g-3 align-items-center">
+    <div class="col-4">
+      <a href="#">
+        <img src="Recursos/sevilla.jpg" class="img-fluid rounded-0 w-100" alt="Noticia 2">
+      </a>
+    </div>
+    <div class="col-8 ps-2">
+      <span class="text-info fw-bold small text-uppercase d-block mb-1">FICHAJES</span>
+      <h6 class="card-title mb-0 fw-bold lh-sm">
+        <a href="#" class="text-dark text-decoration-none side-news-title fs-4 fw-bold">Mercado: el 'recambio' de Filipe Luis puede llegar de Alemania</a>
+      </h6>
+    </div>
+  </div>
+  <div class="d-flex justify-content-end align-items-center mt-2 pt-1 text-secondary extra-small">
+    <span class="text-danger fw-bold">💬 92</span>
+  </div>
+</div>
 
-      <!-- Noticia Lateral 3 -->
-      <div class="card border-0 border-bottom pb-2 rounded-0">
-        <div class="row g-3 align-items-start">
-          <div class="col-4">
-            <a href="#">
-              <img src="Recursos/titular.jpg" class="img-fluid rounded-0 w-100" alt="Noticia 3">
-            </a>
-          </div>
-          <div class="col-8 ps-0">
-            <span class="text-info fw-bold small text-uppercase d-block mb-1">REAL MADRID</span>
-            <h6 class="card-title mb-0 fw-bold lh-sm">
-              <a href="#" class="text-dark text-decoration-none">Champions y Liga para el portero titular</a>
-            </h6>
-          </div>
-        </div>
-        <div class="d-flex justify-content-between align-items-center mt-2 pt-1 text-secondary extra-small">
-          <span class="text-uppercase fw-semibold">JOSÉ FÉLIX DÍAZ</span>
-          <span class="text-danger fw-bold">💬 206</span>
-        </div>
-      </div>
+<!-- Noticia Lateral 3 -->
+<div class="card border-0 border-bottom pb-2 rounded-0">
+  <div class="row g-3 align-items-center">
+    <div class="col-4">
+      <a href="#">
+        <img src="Recursos/titular.jpg" class="img-fluid rounded-0 w-100" alt="Noticia 3">
+      </a>
+    </div>
+    <div class="col-8 ps-2">
+      <span class="text-info fw-bold small text-uppercase d-block mb-1">REAL MADRID</span>
+      <h6 class="card-title mb-0 fw-bold lh-sm">
+        <a href="#" class="text-dark text-decoration-none side-news-title fs-4 fw-bold">Champions y Liga para el portero titular</a>
+      </h6>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between align-items-center mt-2 pt-1 text-secondary extra-small">
+    <span class="text-uppercase fw-semibold">JOSÉ FÉLIX DÍAZ</span>
+    <span class="text-danger fw-bold">💬 206</span>
+  </div>
+</div>
 
     </div>
   </div>
@@ -688,45 +813,71 @@
   <!-- ================================================================= -->
   <section id="seccion-2" class="mb-5 border-bottom pb-4">
     <div class="container py-3 px-0">
-      
+
       <!-- 3 Tarjetas destacadas superiores -->
       <div class="row g-3 mb-4">
-        <div class="col-md-4">
-          <div class="card h-100 border-0">
-            <span class="badge bg-info text-white position-absolute top-0 start-0 m-2">FÚTBOL</span>
-            <a href="#" class="ratio ratio-16x9"><img src="Recursos/main2.webp" class="w-100 h-100 object-fit-cover" alt="Noticia Main 2"></a>
-            <div class="card-body px-0">
-              <h6 class="card-title fw-bold">
-                <a href="#" class="text-dark text-decoration-none link-danger">Felix Orode, el jugador nigeriano que explica el festejo de Dele Alli</a>
-              </h6>
-            </div>
-          </div>
-        </div>
 
-        <div class="col-md-4">
-          <div class="card h-100 border-0">
-            <span class="badge bg-primary position-absolute top-0 start-0 m-2">SERIE A</span>
-            <a href="#" class="ratio ratio-16x9"><img src="Recursos/main3.webp" class="w-100 h-100 object-fit-cover" alt="Noticia Main 3"></a>
-            <div class="card-body px-0">
-              <h6 class="card-title fw-bold">
-                <a href="#" class="text-dark text-decoration-none link-danger">Cristiano habla sobre Cuadrado y la cesión del número 7</a>
-              </h6>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card h-100 border-0">
-            <span class="badge bg-primary position-absolute top-0 start-0 m-2">MÉXICO</span>
-            <a href="#" class="ratio ratio-16x9"><img src="Recursos/main4.webp" class="w-100 h-100 object-fit-cover" alt="Noticia Main 4"></a>
-            <div class="card-body px-0">
-              <h6 class="card-title fw-bold">
-                <a href="#" class="text-dark text-decoration-none link-danger">La joya celeste que hace soñar a Cruz Azul</a>
-              </h6>
-            </div>
-          </div>
+  <!-- Noticia 1: 12 en móvil | 6 en tablet (arriba izq) | 4 en desktop -->
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="card h-100 border-0 rounded-0">
+      <div class="position-relative">
+        <span class="badge bg-info text-white position-absolute top-0 start-0 m-0 rounded-0 px-2 py-1">FÚTBOL</span>
+        <a href="#" class="ratio ratio-16x9">
+          <img src="Recursos/main2.webp" class="w-100 h-100 object-fit-cover rounded-0" alt="Felix Orode">
+        </a>
+      </div>
+      <div class="card-body px-0 pt-2 pb-0 d-flex flex-column justify-content-between">
+        <h5 class="card-title fw-bolder fs-5 lh-sm mb-3">
+          <a href="#" class="text-dark text-decoration-none side-news-title fs-4 fw-bold">Felix Orode, el jugador nigeriano que explica el festejo de Dele Alli</a>
+        </h5>
+        <div class="border-bottom pt-2 pb-1">
+          <span class="text-secondary text-uppercase fw-bold d-block" style="font-size: 0.7rem;" aria-hidden="true"></span>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Noticia 2: 12 en móvil | 6 en tablet (arriba der) | 4 en desktop -->
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="card h-100 border-0 rounded-0">
+      <div class="position-relative">
+        <span class="badge bg-primary position-absolute top-0 start-0 m-0 rounded-0 px-2 py-1">SERIE A</span>
+        <a href="#" class="ratio ratio-16x9">
+          <img src="Recursos/main3.webp" class="w-100 h-100 object-fit-cover rounded-0" alt="Cristiano">
+        </a>
+      </div>
+      <div class="card-body px-0 pt-2 pb-0 d-flex flex-column justify-content-between">
+        <h5 class="card-title fw-bolder fs-5 lh-sm mb-3">
+          <a href="#" class="text-dark text-decoration-none side-news-title fs-4 fw-bold">Cristiano habla sobre Cuadrado y la cesión del número 7</a>
+        </h5>
+        <div class="border-bottom pt-2 pb-1">
+          <span class="text-secondary text-uppercase fw-bold d-block" style="font-size: 0.7rem;">REDACCIÓN MARCA CLARO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Noticia 3: 12 en móvil | 6 en tablet (abajo izq, dejando el hueco) | 4 en desktop -->
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="card h-100 border-0 rounded-0">
+      <div class="position-relative">
+        <span class="badge bg-primary position-absolute top-0 start-0 m-0 rounded-0 px-2 py-1">MÉXICO</span>
+        <a href="#" class="ratio ratio-16x9">
+          <img src="Recursos/main4.webp" class="w-100 h-100 object-fit-cover rounded-0" alt="Cruz Azul">
+        </a>
+      </div>
+      <div class="card-body px-0 pt-2 pb-0 d-flex flex-column justify-content-between">
+        <h5 class="card-title fw-bolder fs-5 lh-sm mb-3">
+          <a href="#" class="text-dark text-decoration-none side-news-title fs-4 fw-bold">La joya celeste que hace soñar a Cruz Azul</a>
+        </h5>
+        <div class="border-bottom pt-2 pb-1">
+          <span class="text-secondary text-uppercase fw-bold d-block" style="font-size: 0.7rem;">JAVIER CARDOSO</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
 
     </div>
 
@@ -795,11 +946,13 @@
       <div class="row g-3">
         <div class="col-12 col-lg-4">
           <div class="card border-0">
-            <span class="badge bg-primary w-auto mb-1 align-self-start">REAL MADRID</span>
-            <a href="#"><img src="Recursos/lunin.jpg" class="card-img-top rounded w-100 lunin-rodrigo-image" alt="Noticia Lateral 4"></a>
+            <div class="position-relative">
+              <span class="badge bg-primary position-absolute top-0 start-0 m-0 rounded-0 px-2 py-1">REAL MADRID</span>
+              <a href="#"><img src="Recursos/lunin.jpg" class="card-img-top rounded w-100 lunin-rodrigo-image" alt="Noticia Lateral 4"></a>
+            </div>
             <div class="card-body px-0">
               <h6 class="card-title fw-bold">
-                <a href="#" class="text-dark text-decoration-none link-danger">Lunin, muy cerca de irse cedido al Leganés</a>
+                <a href="#" class="text-dark text-decoration-none side-news-title fs-4 fw-bold">Lunin, muy cerca de irse cedido al Leganés</a>
               </h6>
             </div>
           </div>
@@ -807,11 +960,13 @@
 
         <div class="col-12 col-lg-4">
           <div class="card border-0">
-            <span class="badge bg-primary w-auto mb-1 align-self-start">REAL MADRID</span>
-            <a href="#"><img src="Recursos/rodrigo.avif" class="card-img-top rounded w-100 lunin-rodrigo-image" alt="Noticia Lateral 5"></a>
+            <div class="position-relative">
+              <span class="badge bg-primary position-absolute top-0 start-0 m-0 rounded-0 px-2 py-1">REAL MADRID</span>
+              <a href="#"><img src="Recursos/rodrigo.avif" class="card-img-top rounded w-100 lunin-rodrigo-image" alt="Noticia Lateral 5"></a>
+            </div>
             <div class="card-body px-0">
               <h6 class="card-title fw-bold">
-                <a href="#" class="text-dark text-decoration-none link-danger">Algo pasa con Rodrigo</a>
+                <a href="#" class="text-dark text-decoration-none side-news-title fs-4 fw-bold">Algo pasa con Rodrigo</a>
               </h6>
             </div>
           </div>
@@ -834,7 +989,7 @@
           <h5 class="text-center mb-4 text-light fw-bold border-bottom border-secondary pb-3">Otras webs de Unidad Editorial</h5>
 
           <div class="row g-4 small text-secondary text-center text-md-start">
-          
+
           <div class="col-6 col-md-3">
             <h6 class="text-white fw-bold mb-3">Marca</h6>
             <ul class="list-unstyled d-flex flex-column gap-1">
