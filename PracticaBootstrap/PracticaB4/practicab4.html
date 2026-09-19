@@ -47,6 +47,35 @@
       text-align: center;
     }
 
+    .team-links {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: max-content;
+      align-items: center;
+      justify-content: safe center;
+      gap: 0.5rem;
+      min-width: 0;
+      max-width: 100%;
+      overflow-x: auto;
+    }
+
+    .team-links a {
+      display: flex;
+      align-items: center;
+      flex: 0 0 auto;
+    }
+
+    .team-links > a:not(:last-child) img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .team-links > a:last-child img {
+      height: 27px;
+      width: auto;
+    }
+
     .agenda-bar {
       display: grid;
       grid-template-columns: auto auto minmax(150px, 1fr) auto minmax(150px, 1fr) auto;
@@ -173,6 +202,7 @@
 
     .search-control {
       width: clamp(150px, 24vw, 210px);
+      overflow: hidden;
       transition: width 0.25s ease;
     }
 
@@ -273,6 +303,88 @@
       text-decoration: none;
     }
 
+    .sports-dropdown {
+      position: static;
+    }
+
+    .sports-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      z-index: 1050;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.25rem 2rem;
+      width: min(1120px, calc(100vw - 1rem));
+      height: 540px;
+      max-height: calc(100vh - 48px);
+      overflow-y: auto;
+      padding: 1.25rem;
+      box-sizing: border-box;
+      background-color: #14212b;
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.35);
+      transform: translateX(-50%);
+    }
+
+    .sports-dropdown:hover > .sports-menu {
+      display: grid;
+    }
+
+    .sports-menu--three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .sports-menu-column {
+      min-width: 0;
+    }
+
+    .sports-menu-title,
+    .sports-menu-link {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .sports-menu-title {
+      margin-bottom: 0.3rem;
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .sports-menu-title:hover,
+    .sports-menu-link:hover {
+      color: #ffcc00;
+    }
+
+    .sports-menu-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.15rem 0.5rem;
+      margin: -0.05rem 0 0.8rem;
+    }
+
+    .sports-menu-link {
+      color: #aeb9c1;
+      font-size: 0.7rem;
+    }
+
+    @media (max-width: 767.98px) {
+      .sports-menu,
+      .sports-menu--three {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        width: calc(100vw - 1rem);
+        height: 70vh;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .sports-menu,
+      .sports-menu--three {
+        grid-template-columns: 1fr;
+      }
+    }
+
     .lunin-rodrigo-image {
       aspect-ratio: 16 / 9;
       object-fit: cover;
@@ -300,6 +412,16 @@
       }
 
       .search-control {
+        width: clamp(140px, 50vw, 180px);
+      }
+    }
+
+    @media (max-width: 991.98px) {
+      .search-control {
+        width: 2.25rem;
+      }
+
+      .search-control:not(.is-collapsed) {
         width: clamp(140px, 50vw, 180px);
       }
     }
@@ -421,53 +543,210 @@
               <img src="Recursos/marca-m.jpg" alt="MARCA" class="img-fluid h-100">
             </a>
 
-            <!-- Fútbol (Dropdown) -->
-            <div class="nav-item dropdown">
-              <a class="nav-link text-white dropdown-toggle py-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Fútbol
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">LaLiga Santander</a></li>
-                <li><a class="dropdown-item" href="#">Liga MX</a></li>
-                <li><a class="dropdown-item" href="#">Champions League</a></li>
-              </ul>
-            </div>
+            <!-- Fútbol -->
+<div class="nav-item sports-dropdown">
+  <a class="nav-link text-white dropdown-toggle py-1" href="#" aria-haspopup="true">Fútbol</a>
+  <div class="sports-menu">
+    <div class="sports-menu-column">
+      <a class="sports-menu-title" href="#">España</a>
+      <div class="sports-menu-links"><a class="sports-menu-link" href="#">Calendario</a><a class="sports-menu-link" href="#">Clasificación</a><a class="sports-menu-link" href="#">Equipos</a></div>
+      <a class="sports-menu-title" href="#">LALIGA EA Sports</a>
+      <a class="sports-menu-title" href="#">Liga F Moeve</a>
+      <a class="sports-menu-title" href="#">LALIGA Hypermotion</a>
+      <a class="sports-menu-title" href="#">Primera Federación</a>
+      <a class="sports-menu-title" href="#">Segunda Federación</a>
+      <a class="sports-menu-title" href="#">Tercera Federación</a>
+      <a class="sports-menu-title" href="#">Copa del Rey</a>
+      <a class="sports-menu-title" href="#">Copa de la Reina</a>
+      <a class="sports-menu-title" href="#">Más fútbol</a>
+      <a class="sports-menu-title" href="#">Supercopa de España</a>
+      <a class="sports-menu-title" href="#">Supercopa de España femenina</a>
+      <a class="sports-menu-title" href="#">Selección Española</a>
+      <div class="sports-menu-links"><a class="sports-menu-link" href="#">UEFA Nations League</a></div>
+      <a class="sports-menu-title" href="#">Selección Española femenina</a>
+      <div class="sports-menu-links"><a class="sports-menu-link" href="#">Eurocopa</a></div>
+      <a class="sports-menu-title" href="#">Fútbol Sala</a>
+      <a class="sports-menu-title" href="#">Premios MARCA de Fútbol</a>
+      <a class="sports-menu-title" href="#">FootHistoria</a>
+    </div>
+    <div class="sports-menu-column">
+      <a class="sports-menu-title" href="#">Internacional</a>
+      <div class="sports-menu-links"><a class="sports-menu-link" href="#">Calendario</a><a class="sports-menu-link" href="#">Clasificación</a><a class="sports-menu-link" href="#">Equipos</a></div>
+      <a class="sports-menu-title" href="#">Premier League</a>
+      <a class="sports-menu-title" href="#">Bundesliga</a>
+      <a class="sports-menu-title" href="#">Serie A</a>
+      <a class="sports-menu-title" href="#">Ligue 1</a>
+      <a class="sports-menu-title" href="#">Primeira Liga de Portugal</a>
+      <a class="sports-menu-title" href="#">Liga Saudí</a>
+    </div>
+    <div class="sports-menu-column">
+      <a class="sports-menu-title" href="#">Mundial</a>
+      <div class="sports-menu-links"><a class="sports-menu-link" href="#">Calendario</a><a class="sports-menu-link" href="#">Fase de grupos</a><a class="sports-menu-link" href="#">Resultados</a></div>
+      <a class="sports-menu-title" href="#">Champions League</a>
+      <a class="sports-menu-title" href="#">Champions League femenina</a>
+      <a class="sports-menu-title" href="#">Europa League</a>
+      <a class="sports-menu-title" href="#">Conference League</a>
+      <a class="sports-menu-title" href="#">Youth League</a>
+      <a class="sports-menu-title" href="#">Supercopa de Europa</a>
+      <a class="sports-menu-title" href="#">Copa Intercontinental</a>
+      <a class="sports-menu-title" href="#">Mundial de Clubes</a>
+      <a class="sports-menu-title" href="#">Mundial Femenino</a>
+      <a class="sports-menu-title" href="#">Mundial Sub 20</a>
+      <a class="sports-menu-title" href="#">Mundial Sub 17</a>
+      <a class="sports-menu-title" href="#">EURO 2024</a>
+      <a class="sports-menu-title" href="#">Copa África</a>
+    </div>
+    <div class="sports-menu-column">
+      <a class="sports-menu-title" href="#">América</a>
+      <div class="sports-menu-links"><a class="sports-menu-link" href="#">Calendario</a><a class="sports-menu-link" href="#">Clasificación</a></div>
+      <a class="sports-menu-title" href="#">Argentina</a>
+      <a class="sports-menu-title" href="#">Chile</a>
+      <a class="sports-menu-title" href="#">Colombia</a>
+      <a class="sports-menu-title" href="#">Estados Unidos</a>
+      <a class="sports-menu-title" href="#">México</a>
+      <a class="sports-menu-title" href="#">Venezuela</a>
+      <a class="sports-menu-title" href="#">Leagues Cup</a>
+      <a class="sports-menu-title" href="#">CONMEBOL Libertadores</a>
+      <a class="sports-menu-title" href="#">Copa América</a>
+      <a class="sports-menu-title" href="#">Más América</a>
+    </div>
+  </div>
+</div>
 
-            <!-- Motor (Dropdown) -->
-            <div class="nav-item dropdown">
-              <a class="nav-link text-white dropdown-toggle py-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Motor
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Fórmula 1</a></li>
-                <li><a class="dropdown-item" href="#">MotoGP</a></li>
-              </ul>
-            </div>
+            <!-- Baloncesto -->
+<div class="nav-item sports-dropdown">
+  <a class="nav-link text-white dropdown-toggle py-1" href="#" aria-haspopup="true">Baloncesto</a>
+  <div class="sports-menu sports-menu--three">
+    <div class="sports-menu-column">
+      <a class="sports-menu-title" href="#">España</a>
+      <a class="sports-menu-title" href="#">Liga Endesa</a>
+      <div class="sports-menu-links"><a class="sports-menu-link" href="#">Calendario</a><a class="sports-menu-link" href="#">Clasificación</a></div>
+      <a class="sports-menu-title" href="#">Liga Endesa femenina</a>
+      <a class="sports-menu-title" href="#">Primera FEB</a>
+      <a class="sports-menu-title" href="#">Segunda FEB</a>
+      <a class="sports-menu-title" href="#">Copa del Rey</a>
+      <div class="sports-menu-links"><a class="sports-menu-link" href="#">Cuadro y resultados</a></div>
+      <a class="sports-menu-title" href="#">Supercopa Endesa</a>
+      <div class="sports-menu-links"><a class="sports-menu-link" href="#">Cuadro y resultados</a></div>
+      <a class="sports-menu-title" href="#">Basket FEB</a>
+      <a class="sports-menu-title" href="#">Selección</a>
+    </div>
+    <div class="sports-menu-column">
+      <a class="sports-menu-title" href="#">Europa</a>
+      <a class="sports-menu-title" href="#">Eurobasket</a>
+      <div class="sports-menu-links"><a class="sports-menu-link" href="#">Clasificación</a><a class="sports-menu-link" href="#">Calendario</a></div>
+      <a class="sports-menu-title" href="#">Euroliga</a>
+      <a class="sports-menu-title" href="#">Euroliga femenina</a>
+      <a class="sports-menu-title" href="#">Eurocup</a>
+      <a class="sports-menu-title" href="#">FIBA Champions League</a>
+      <div class="sports-menu-links"><a class="sports-menu-link" href="#">Resultados y Clasificación</a></div>
+    </div>
+    <div class="sports-menu-column">
+      <a class="sports-menu-title" href="#">Internacional</a>
+      <a class="sports-menu-title" href="#">NBA</a>
+      <div class="sports-menu-links"><a class="sports-menu-link" href="#">Calendario</a><a class="sports-menu-link" href="#">Clasificaciones</a><a class="sports-menu-link" href="#">Equipos</a></div>
+      <a class="sports-menu-title" href="#">Mundial 2023</a>
+    </div>
+  </div>
+</div>
 
-            <a class="nav-link text-white py-1" href="#">Boxeo</a>
+            <!-- Motor -->
+<div class="nav-item sports-dropdown">
+  <a class="nav-link text-white dropdown-toggle py-1" href="#" aria-haspopup="true">Motor</a>
+  <div class="sports-menu sports-menu--three">
+    <div class="sports-menu-column">
+      <a class="sports-menu-title" href="#">Coches</a>
+      <a class="sports-menu-title" href="#">Fórmula 1</a>
+      <div class="sports-menu-links"><a class="sports-menu-link" href="#">Calendario</a><a class="sports-menu-link" href="#">Clasificación de pilotos</a><a class="sports-menu-link" href="#">Clasificación de constructores</a></div>
+      <a class="sports-menu-title" href="#">Grandes Premios de Fórmula 1</a>
+      <div class="sports-menu-links">
+        <a class="sports-menu-link" href="#">Australia</a><a class="sports-menu-link" href="#">China</a><a class="sports-menu-link" href="#">Japón</a><a class="sports-menu-link" href="#">Bahrein</a>
+        <a class="sports-menu-link" href="#">Arabia Saudí</a><a class="sports-menu-link" href="#">Miami</a><a class="sports-menu-link" href="#">Canadá</a><a class="sports-menu-link" href="#">Mónaco</a>
+        <a class="sports-menu-link" href="#">Barcelona-Catalunya</a><a class="sports-menu-link" href="#">Austria</a><a class="sports-menu-link" href="#">Gran Bretaña</a>
+        <a class="sports-menu-link" href="#">Bélgica</a><a class="sports-menu-link" href="#">Hungría</a><a class="sports-menu-link" href="#">Países Bajos</a><a class="sports-menu-link" href="#">Italia</a><a class="sports-menu-link" href="#">España</a>
+        <a class="sports-menu-link" href="#">Azerbaiyán</a><a class="sports-menu-link" href="#">Bahrein</a><a class="sports-menu-link" href="#">Singapur</a>
+        <a class="sports-menu-link" href="#">Estados Unidos</a><a class="sports-menu-link" href="#">México</a><a class="sports-menu-link" href="#">Brasil</a><a class="sports-menu-link" href="#">Las Vegas</a>
+        <a class="sports-menu-link" href="#">Qatar</a><a class="sports-menu-link" href="#">Abu Dhabi</a>
+      </div>
+      <a class="sports-menu-title" href="#">Dakar</a>
+      <a class="sports-menu-title" href="#">Indycar</a>
+      <a class="sports-menu-title" href="#">24 Horas de Daytona</a>
+      <a class="sports-menu-title" href="#">24 Horas de Le Mans</a>
+    </div>
+    <div class="sports-menu-column">
+      <a class="sports-menu-title" href="#">Motos</a>
+      <a class="sports-menu-title" href="#">Fórmula E</a>
+      <a class="sports-menu-title" href="#">Rallies</a>
+      <div class="sports-menu-links"><a class="sports-menu-link" href="#">Calendario</a><a class="sports-menu-link" href="#">Clasificación de pilotos</a><a class="sports-menu-link" href="#">Clasificación de equipos</a></div>
+      <a class="sports-menu-title" href="#">Moto GP</a>
+      <div class="sports-menu-links"><a class="sports-menu-link" href="#">Calendario</a><a class="sports-menu-link" href="#">Clasificación de pilotos</a></div>
+      <a class="sports-menu-title" href="#">Grandes Premios de Moto GP</a>
+      <div class="sports-menu-links">
+        <a class="sports-menu-link" href="#">Tailandia</a><a class="sports-menu-link" href="#">Brasil</a><a class="sports-menu-link" href="#">Las Américas</a><a class="sports-menu-link" href="#">Qatar</a>
+        <a class="sports-menu-link" href="#">España</a><a class="sports-menu-link" href="#">Francia</a><a class="sports-menu-link" href="#">Cataluña</a><a class="sports-menu-link" href="#">Italia</a><a class="sports-menu-link" href="#">Hungría</a>
+        <a class="sports-menu-link" href="#">República Checa</a><a class="sports-menu-link" href="#">Países Bajos</a><a class="sports-menu-link" href="#">Alemania</a>
+        <a class="sports-menu-link" href="#">Gran Bretaña</a><a class="sports-menu-link" href="#">Aragón</a><a class="sports-menu-link" href="#">San Marino</a><a class="sports-menu-link" href="#">Austria</a>
+        <a class="sports-menu-link" href="#">Japón</a><a class="sports-menu-link" href="#">Indonesia</a><a class="sports-menu-link" href="#">Australia</a><a class="sports-menu-link" href="#">Malasia</a>
+        <a class="sports-menu-link" href="#">Portugal</a><a class="sports-menu-link" href="#">Valencia</a>
+      </div>
+      <a class="sports-menu-title" href="#">WEC</a>
+    </div>
+    <div class="sports-menu-column">
+      <a class="sports-menu-title" href="#">Modelos de coches</a>
+      <a class="sports-menu-title" href="#">Pruebas de coches</a>
+      <a class="sports-menu-title" href="#">Ocio</a>
+      <a class="sports-menu-title" href="#">Vídeos</a>
+    </div>
+  </div>
+</div>
 
-            <!-- NFL (Dropdown) -->
-            <div class="nav-item dropdown">
-              <a class="nav-link text-white dropdown-toggle py-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                NFL
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Resultados</a></li>
-                <li><a class="dropdown-item" href="#">Super Bowl</a></li>
-              </ul>
-            </div>
-
-            <!-- Otros deportes (Dropdown) -->
-            <div class="nav-item dropdown">
-              <a class="nav-link text-white dropdown-toggle py-1" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Otros deportes
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Tenis</a></li>
-                <li><a class="dropdown-item" href="#">Ciclismo</a></li>
-                <li><a class="dropdown-item" href="#">Béisbol</a></li>
-              </ul>
-            </div>
+            <!-- Polideportivo -->
+<div class="nav-item sports-dropdown">
+  <a class="nav-link text-white dropdown-toggle py-1" href="#" aria-haspopup="true">Polideportivo</a>
+  <div class="sports-menu">
+    <div class="sports-menu-column">
+      <a class="sports-menu-title" href="#">Destacamos</a>
+      <a class="sports-menu-title" href="#">Atletismo</a>
+      <a class="sports-menu-title" href="#">Balonmano</a>
+      <a class="sports-menu-title" href="#">Ciclismo</a>
+      <a class="sports-menu-title" href="#">Golf</a>
+      <a class="sports-menu-title" href="#">Tenis</a>
+      <a class="sports-menu-title" href="#">Boxeo</a>
+      <a class="sports-menu-title" href="#">Pádel</a>
+    </div>
+    <div class="sports-menu-column">
+      <a class="sports-menu-title" href="#">Otros deportes ›</a>
+      <a class="sports-menu-title" href="#">Ajedrez</a>
+      <a class="sports-menu-title" href="#">Deportes Aventura</a>
+      <a class="sports-menu-title" href="#">Deportes Invierno</a>
+      <a class="sports-menu-title" href="#">eSports</a>
+      <a class="sports-menu-title" href="#">Hípica</a>
+      <a class="sports-menu-title" href="#">Hockey Hierba</a>
+      <a class="sports-menu-title" href="#">Hockey Patines</a>
+      <a class="sports-menu-title" href="#">Juegos Olímpicos</a>
+      <a class="sports-menu-title" href="#">Juegos Olímpicos de Invierno</a>
+    </div>
+    <div class="sports-menu-column">
+      <a class="sports-menu-title" href="#">MMA</a>
+      <a class="sports-menu-title" href="#">Natación</a>
+      <a class="sports-menu-title" href="#">NFL</a>
+      <a class="sports-menu-title" href="#">NHL</a>
+      <a class="sports-menu-title" href="#">Olimpismo</a>
+      <a class="sports-menu-title" href="#">Paralímpicos</a>
+      <a class="sports-menu-title" href="#">Rugby</a>
+      <a class="sports-menu-title" href="#">Tenis de mesa</a>
+    </div>
+    <div class="sports-menu-column">
+      <a class="sports-menu-title" href="#">Toros</a>
+      <a class="sports-menu-title" href="#">Triatlón</a>
+      <a class="sports-menu-title" href="#">Turf</a>
+      <a class="sports-menu-title" href="#">UFC</a>
+      <a class="sports-menu-title" href="#">Vela</a>
+      <a class="sports-menu-title" href="#">Voleibol</a>
+      <a class="sports-menu-title" href="#">Waterpolo</a>
+    </div>
+  </div>
+</div>
 
             <!-- Separador y secciones directas -->
             <a class="nav-link text-white py-1" href="#">Actualidad</a>
@@ -619,21 +898,38 @@
       function updateNavOnScroll() {
         const isScrolled = window.scrollY > 80;
         const wasScrolled = mainNavBar.classList.contains('is-scrolled');
+        const isCompactViewport = window.innerWidth < 992;
+        const shouldCollapse = isScrolled || isCompactViewport;
 
         mainNavBar.classList.toggle('is-scrolled', isScrolled);
 
         if (isScrolled !== wasScrolled) {
-          searchControl.classList.toggle('is-collapsed', isScrolled);
-          searchToggle.setAttribute('aria-expanded', String(!isScrolled));
-          searchToggle.setAttribute('aria-label', isScrolled ? 'Abrir búsqueda' : 'Enfocar búsqueda');
+          searchControl.classList.toggle('is-collapsed', shouldCollapse);
+          searchToggle.setAttribute('aria-expanded', String(!shouldCollapse));
+          searchToggle.setAttribute('aria-label', shouldCollapse ? 'Abrir búsqueda' : 'Enfocar búsqueda');
         }
       }
 
       window.addEventListener('scroll', updateNavOnScroll);
       updateNavOnScroll();
 
+      function updateSearchForViewport() {
+        const isCompactViewport = window.innerWidth < 992;
+        const isScrolled = mainNavBar.classList.contains('is-scrolled');
+        const shouldCollapse = isCompactViewport || isScrolled;
+
+        searchControl.classList.toggle('is-collapsed', shouldCollapse);
+        searchToggle.setAttribute('aria-expanded', String(!shouldCollapse));
+        searchToggle.setAttribute('aria-label', shouldCollapse ? 'Abrir búsqueda' : 'Enfocar búsqueda');
+      }
+
+      window.addEventListener('resize', updateSearchForViewport);
+      updateSearchForViewport();
+
       searchToggle.addEventListener('click', function () {
-        if (!mainNavBar.classList.contains('is-scrolled')) {
+        const isCompactViewport = window.innerWidth < 992;
+
+        if (!mainNavBar.classList.contains('is-scrolled') && !isCompactViewport) {
           searchControl.querySelector('input').focus();
           return;
         }
@@ -652,26 +948,28 @@
     <div class="container py-3 px-0">
 
       <!-- Sub-barra de escudos/equipos centrada y con hipervínculos -->
-      <div class="d-flex align-items-center justify-content-center gap-2 border-bottom pb-2 mb-3 overflow-auto flex-nowrap p-1">
-        <a href="#"><img src="Recursos/mini5.png" alt="Equipo 5" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini6.png" alt="Equipo 6" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini7.png" alt="Equipo 7" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini8.png" alt="Equipo 8" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini9.png" alt="Equipo 9" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini10.png" alt="Equipo 10" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini11.png" alt="Equipo 11" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini12.png" alt="Equipo 12" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini13.png" alt="Equipo 13" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini14.png" alt="Equipo 14" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini15.png" alt="Equipo 15" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini16.png" alt="Equipo 16" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini17.png" alt="Equipo 17" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini18.png" alt="Equipo 18" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini19.png" alt="Equipo 19" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini20.png" alt="Equipo 20" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini21.png" alt="Equipo 21" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/mini22.png" alt="Equipo 22" class="img-fluid"></a>
-        <a href="#"><img src="Recursos/marcaapuestas.png" alt="MARCA Apuestas" class="ms-2" height="30"></a>
+      <div class="team-links border-bottom pb-2 mb-3 p-1">
+        <a href="#"><img src="Recursos/team1.png" alt="Equipo 1" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team2.png" alt="Equipo 2" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team3.png" alt="Equipo 3" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team4.png" alt="Equipo 4" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team5.png" alt="Equipo 5" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team6.png" alt="Equipo 6" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team7.png" alt="Equipo 7" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team8.png" alt="Equipo 8" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team9.png" alt="Equipo 9" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team10.png" alt="Equipo 10" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team11.png" alt="Equipo 11" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team12.png" alt="Equipo 12" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team13.png" alt="Equipo 13" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team14.png" alt="Equipo 14" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team15.png" alt="Equipo 15" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team16.png" alt="Equipo 16" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team17.png" alt="Equipo 17" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team18.png" alt="Equipo 18" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team19.png" alt="Equipo 19" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/team20.png" alt="Equipo 20" class="img-fluid"></a>
+        <a href="#"><img src="Recursos/marcaapuestas.png" alt="MARCA Apuestas" class="ms-2"></a>
       </div>
 
       <!-- Banner de Publicidad Centralizado -->
